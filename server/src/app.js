@@ -69,6 +69,24 @@ const healthCheck = (req, res) => {
 app.get('/health', healthCheck);
 app.get('/api/v1/health', healthCheck);
 
+// Root informational greeting
+app.get('/', (req, res) => {
+  res.json({
+    name: 'NativeRise API',
+    tagline: 'From the village to your doorstep. / गावापासून तुमच्या दारापर्यंत.',
+    status: 'online',
+    version: '1.0.0',
+    webApp: 'http://localhost:5173',
+    endpoints: {
+      health: '/health',
+      apiV1: '/api/v1',
+      products: '/api/v1/products',
+      categories: '/api/v1/categories',
+      sellers: '/api/v1/sellers'
+    }
+  });
+});
+
 // 6. Routes under /api/v1
 app.use('/api/v1', apiRouter);
 

@@ -16,6 +16,22 @@ import aiRoutes from './ai.routes.js';
 
 const router = Router();
 
+router.get('/', (req, res) => {
+  res.json({
+    name: 'NativeRise API v1',
+    status: 'online',
+    endpoints: {
+      health: '/api/v1/health',
+      products: '/api/v1/products',
+      categories: '/api/v1/categories',
+      sellers: '/api/v1/sellers',
+      auth: '/api/v1/auth',
+      cart: '/api/v1/cart',
+      orders: '/api/v1/orders'
+    }
+  });
+});
+
 router.use('/auth', authRoutes);
 router.use('/me', meRoutes);
 router.use('/geo', geoRoutes);
