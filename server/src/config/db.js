@@ -3,6 +3,9 @@ import mongoose from 'mongoose';
 import config from './env.js';
 
 export async function connectDB() {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
   try {
     const conn = await mongoose.connect(config.MONGODB_URI);
     console.log(`[Database] MongoDB connected: ${conn.connection.host}`);

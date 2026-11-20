@@ -133,7 +133,10 @@ const resources = {
   }
 };
 
-const savedLang = typeof window !== 'undefined' ? localStorage.getItem('nr_lang') || 'en' : 'en';
+const savedLang =
+  typeof window !== 'undefined' && typeof localStorage !== 'undefined'
+    ? localStorage.getItem('nr_lang') || 'en'
+    : 'en';
 
 i18n
   .use(initReactI18next)

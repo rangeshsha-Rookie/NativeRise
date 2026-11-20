@@ -3,11 +3,15 @@ import React, { useState } from 'react';
 import { Outlet, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import Header from './Header';
 import Footer from './Footer';
 import BottomNav from './BottomNav';
 import LanguageToggle from '../LanguageToggle';
 import LocationPicker from '../map/LocationPicker';
+import CustomerAssistantModal from '../assistant/CustomerAssistantModal';
+import Modal from '../ui/Modal';
+import Button from '../ui/Button';
 import {
   Home,
   Package,
@@ -21,11 +25,14 @@ import {
   Settings,
   User,
   LogOut,
-  X
+  X,
+  AlertTriangle
 } from 'lucide-react';
 import clsx from 'clsx';
 
 export function CustomerLayout() {
+  const { t } = useTranslation();
+  const { count, conflictModal, handleConfirmConflict, handleCancelConflict } = useCart();
   const [showLocationPicker, setShowLocationPicker] = useState(false);
   const guestLoc = typeof window !== 'undefined' ? localStorage.getItem('nr_guest_loc') : null;
   const guestLocLabel = guestLoc ? JSON.parse(guestLoc)?.label : null;
@@ -35,17 +42,55 @@ export function CustomerLayout() {
       <Header
         locationLabel={guestLocLabel}
         onOpenLocationPicker={() => setShowLocationPicker(true)}
+        cartCount={count}
       />
       <main className="flex-1 pb-16 md:pb-0">
         <Outlet />
       </main>
       <Footer />
-      <BottomNav role="customer" />
+      <BottomNav role="customer" cartCount={count} />
+      <CustomerAssistantModal />
       {showLocationPicker && (
         <LocationPicker
           isOpen={showLocationPicker}
           onClose={() => setShowLocationPicker(false)}
         />
+      )}
+
+      {/* Single Seller Cart Conflict Modal */}
+      {conflictModal?.isOpen && (
+        <Modal
+          isOpen={conflictModal.isOpen}
+          onClose={handleCancelConflict}
+          title={t('cart.conflictTitle', 'Replace items in cart?')}
+          maxWidth="max-w-md"
+        >
+          <div className="p-4 space-y-4">
+            <div className="flex items-start gap-3 text-ink">
+              <div className="p-2 bg-clay/10 rounded-full text-clay shrink-0">
+                <AlertTriangle className="w-6 h-6" />
+              </div>
+              <p className="text-sm">
+                {t(
+                  'cart.conflictMessage',
+                  'Your cart already contains items from {{currentShop}}. A cart can only contain items from one village shop at a time. Would you like to clear your cart and add this item from {{newShop}}?',
+                  {
+                    currentShop: conflictModal.currentSellerName,
+                    newShop: conflictModal.newSellerName
+                  }
+                )}
+              </p>
+            </div>
+            <div className="flex items-center justify-end gap-3 pt-2">
+              <Button variant="ghost" onClick={handleCancelConflict}>
+                {t('common.cancel', 'Cancel')}
+              </Button>
+              <Button variant="danger" onClick={handleConfirmConflict}>
+                {t('cart.replaceCart', 'Clear and Replace')}
+              </Button>
+            </div>
+          </div>
+        </Modal>
       )}
     </div>
   );

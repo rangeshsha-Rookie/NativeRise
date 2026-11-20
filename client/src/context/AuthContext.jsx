@@ -21,12 +21,13 @@ export function AuthProvider({ children }) {
 
       try {
         const response = await apiClient.get('/auth/me');
-        if (response?.ok && response.data) {
-          setUser(response.data.user);
-          setProfile(response.data.profile);
-          // Apply user preferred language if set
-          if (response.data.user.preferredLang) {
-            changeLanguage(response.data.user.preferredLang);
+        const userData = response.data?.user || response.user;
+        const profileData = response.data?.profile || response.profile;
+        if (userData) {
+          setUser(userData);
+          setProfile(profileData || null);
+          if (userData.preferredLang) {
+            changeLanguage(userData.preferredLang);
           }
         }
       } catch (err) {
@@ -43,27 +44,29 @@ export function AuthProvider({ children }) {
 
   const login = async (email, password) => {
     const res = await apiClient.post('/auth/login', { email, password });
-    if (res?.ok && res.data) {
-      localStorage.setItem('nr_token', res.data.token);
-      setUser(res.data.user);
-      setProfile(res.data.profile);
-      if (res.data.user.preferredLang) {
-        changeLanguage(res.data.user.preferredLang);
+    const resData = res.data || res;
+    if (resData?.token) {
+      localStorage.setItem('nr_token', resData.token);
+      setUser(resData.user);
+      setProfile(resData.profile || null);
+      if (resData.user?.preferredLang) {
+        changeLanguage(resData.user.preferredLang);
       }
-      return res.data;
+      return resData;
     }
   };
 
   const register = async (payload) => {
     const res = await apiClient.post('/auth/register', payload);
-    if (res?.ok && res.data) {
-      localStorage.setItem('nr_token', res.data.token);
-      setUser(res.data.user);
-      setProfile(res.data.profile);
-      if (res.data.user.preferredLang) {
-        changeLanguage(res.data.user.preferredLang);
+    const resData = res.data || res;
+    if (resData?.token) {
+      localStorage.setItem('nr_token', resData.token);
+      setUser(resData.user);
+      setProfile(resData.profile || null);
+      if (resData.user?.preferredLang) {
+        changeLanguage(resData.user.preferredLang);
       }
-      return res.data;
+      return resData;
     }
   };
 

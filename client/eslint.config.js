@@ -34,6 +34,12 @@ export default [
         console: 'readonly',
         fetch: 'readonly',
         URL: 'readonly',
+        URLSearchParams: 'readonly',
+        FileReader: 'readonly',
+        FormData: 'readonly',
+        alert: 'readonly',
+        confirm: 'readonly',
+        prompt: 'readonly',
         import: 'readonly',
         process: 'readonly'
       }
@@ -44,9 +50,12 @@ export default [
       }
     },
     rules: {
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      'no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^React|^_' }],
       'react-hooks/rules-of-hooks': 'error',
-      'react-hooks/exhaustive-deps': 'warn'
+      'react-hooks/exhaustive-deps': 'warn',
+      'react/prop-types': 'off'
     }
   }
 ];
