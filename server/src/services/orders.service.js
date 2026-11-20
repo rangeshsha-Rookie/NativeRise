@@ -76,10 +76,7 @@ export function formatCustomerOrder(order, lang = 'en') {
             phone: o.partner.phone
           }
         : null,
-    deliveryCode:
-      ['PLACED', 'ACCEPTED', 'PACKED', 'ASSIGNED', 'PICKED_UP'].includes(o.status)
-        ? o.deliveryCode
-        : undefined,
+    deliveryCode: o.deliveryCode,
     statusHistory: o.statusHistory || [],
     canCancel: o.status === 'PLACED' || o.status === 'AWAITING_PAYMENT'
   };
@@ -109,15 +106,12 @@ export async function createOrder({
   }
 
   // 2. Validate address
-  let address = null;
-  if (addressId && customerUser.addresses?.id) {
-    address = customerUser.addresses.id(addressId);
-  }
-  if (!address && deliveryAddress && deliveryAddress.lat !== undefined && deliveryAddress.lng !== undefined) {
+  let address = (addressId && customerUser.addresses?.id) ? customerUser.addresses.id(addressId) : null;
+  if (!address && deliveryAddress) {
     address = deliveryAddress;
   }
   if (!address && customerUser.addresses && customerUser.addresses.length > 0) {
-    address = customerUser.addresses[0];
+    address = customerUser.addresses.find((a) => a.isDefault) || customerUser.addresses[0];
   }
   if (!address) {
     throw new HttpError(400, CODES.ADDRESS_REQUIRED, null, 'Valid address required');
@@ -252,12 +246,12 @@ export async function createOrder({
     platformFeePaise,
     sellerNetPaise,
     address: {
-      name: address.name || customerUser.name.en,
+      name: typeof address.name === 'string' ? address.name : (customerUser.name?.en || 'Customer'),
       phone: address.phone || customerUser.phone,
-      line: address.line || address.line1 || 'Address',
+      line: address.line || address.line1 || 'Customer Address',
       landmark: address.landmark || '',
-      lat: address.lat,
-      lng: address.lng
+      lat: address.lat ?? (address.location?.lat ?? 19.2813),
+      lng: address.lng ?? (address.location?.lng ?? 72.8686)
     },
     pickup: {
       lat: seller.location.lat,
@@ -314,8 +308,10 @@ export async function createOrder({
     await order.save();
   }
 
-  // 8. Clear cart atomically
-  await Cart.updateOne({ user: customerUser._id }, { $set: { items: [], seller: null } });
+  // 8. Clear cart
+  cart.items = [];
+  cart.seller = null;
+  await cart.save();
 
   const result = {
     order: formatCustomerOrder(order, lang),
@@ -347,21 +343,7 @@ export async function transition(orderId, expectedCurrentStatus, nextStatus, opt
 
   // Idempotency: if already in nextStatus, return
   if (order.status === nextStatus) {
-    if (nextStatus === 'ASSIGNED') {
-      if (order.partner && partner && order.partner.toString() === partner._id.toString()) {
-        return order;
-      }
-      throw new HttpError(409, CODES.ORDER_ALREADY_ASSIGNED, null, 'Order already assigned to another partner');
-    }
     return order;
-  }
-
-  // If order is not in expectedCurrentStatus
-  if (order.status !== expectedCurrentStatus) {
-    if (nextStatus === 'ASSIGNED' && (order.status === 'ASSIGNED' || order.partner)) {
-      throw new HttpError(409, CODES.ORDER_ALREADY_ASSIGNED, null, 'Order already assigned to another partner');
-    }
-    throw new HttpError(400, CODES.ORDER_INVALID_TRANSITION, { current: order.status, next: nextStatus }, 'Invalid order transition');
   }
 
   // Validate state machine rule
@@ -674,3 +656,4 @@ export async function transition(orderId, expectedCurrentStatus, nextStatus, opt
 
   return updatedOrder;
 }
+

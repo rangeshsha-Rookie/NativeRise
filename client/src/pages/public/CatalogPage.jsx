@@ -46,11 +46,11 @@ export function CatalogPage() {
         if (inStockOnly) params.set('inStock', 'true');
         params.set('limit', '40');
 
-        const res = await apiClient.get(`/catalog/products?${params.toString()}`);
-        if (mounted && res?.ok && res.data) {
-          const list = res.data.products || res.data || [];
+        const res = await apiClient.get(`/products?${params.toString()}`);
+        if (mounted) {
+          const list = res?.items || res?.data?.items || res?.data?.products || (Array.isArray(res) ? res : []);
           setProducts(list);
-          setTotalCount(res.data.total || list.length);
+          setTotalCount(res?.meta?.total ?? list.length);
         }
       } catch (err) {
         if (mounted) setProducts([]);

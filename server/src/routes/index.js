@@ -19,6 +19,7 @@ const router = Router();
 router.use('/auth', authRoutes);
 router.use('/me', meRoutes);
 router.use('/geo', geoRoutes);
+router.use('/catalog', catalogRoutes);
 router.use('/', catalogRoutes);
 router.use('/cart', cartRoutes);
 router.use('/orders', ordersRoutes);

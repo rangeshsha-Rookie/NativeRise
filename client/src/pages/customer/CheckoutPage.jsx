@@ -37,8 +37,8 @@ function loadRazorpayScript() {
 export function CheckoutPage() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
-  const { user, profile } = useAuth();
-  const { cart, refreshCart } = useCart();
+  const { user, profile, loading: authLoading } = useAuth();
+  const { cart, refreshCart, loading: cartLoading } = useCart();
   const isMr = i18n.language === 'mr';
 
   const [selectedAddressIndex, setSelectedAddressIndex] = useState(0);
@@ -188,12 +188,12 @@ export function CheckoutPage() {
         }
       });
 
-      if (!res?.ok || !res.data) {
+      const orderData = res?.order || res?.data?.order;
+      const razorpayData = res?.razorpay || res?.data?.razorpay;
+
+      if (!orderData) {
         throw new Error('Order creation failed');
       }
-
-      const orderData = res.data.order;
-      const razorpayData = res.data.razorpay;
 
       // Handle Cash on Delivery Flow
       if (paymentMethod === 'COD' || !razorpayData) {
@@ -257,6 +257,14 @@ export function CheckoutPage() {
       setSubmitting(false);
     }
   };
+
+  if (authLoading || (cartLoading && (!cart.items || cart.items.length === 0))) {
+    return (
+      <div className="max-w-[800px] mx-auto px-4 py-20 text-center">
+        <div className="w-8 h-8 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto" />
+      </div>
+    );
+  }
 
   if (!cart.items || cart.items.length === 0) {
     return (

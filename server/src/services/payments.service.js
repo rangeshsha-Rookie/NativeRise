@@ -35,15 +35,6 @@ export async function createRazorpayOrder({ orderId, orderNo, amountPaise }) {
     return rzpOrder;
   } catch (err) {
     console.error('[Razorpay:createOrder] Error:', err.message);
-    if (config.NODE_ENV === 'test' || !config.RAZORPAY_KEY_ID.startsWith('rzp_live')) {
-      return {
-        id: `order_mock_${Date.now()}`,
-        amount: amountPaise,
-        currency: 'INR',
-        receipt: orderNo,
-        status: 'created'
-      };
-    }
     throw new HttpError(502, CODES.PAYMENT_FAILED, { error: err.message }, 'Failed to create payment order');
   }
 }
@@ -83,6 +74,7 @@ export async function fetchAndCapturePayment(paymentId, expectedAmountPaise) {
       method: 'upi'
     };
   }
+
   const rzp = getRazorpayClient();
   try {
     const payment = await rzp.payments.fetch(paymentId);
@@ -120,6 +112,7 @@ export async function reconcileRazorpayOrder(razorpayOrderId, expectedAmountPais
       method: 'upi'
     };
   }
+
   const rzp = getRazorpayClient();
   try {
     const payments = await rzp.orders.fetchPayments(razorpayOrderId);
@@ -149,8 +142,8 @@ export async function reconcileRazorpayOrder(razorpayOrderId, expectedAmountPais
  * Issues a refund for a payment
  */
 export async function refundPayment(paymentId, amountPaise, reason = 'Order cancelled or rejected') {
-  // If demo payment, simulate refund successfully
-  if (paymentId && paymentId.startsWith('demo_')) {
+  // If demo or mock payment, simulate refund successfully
+  if (paymentId && (paymentId.startsWith('demo_') || paymentId.startsWith('pay_mock_') || config.NODE_ENV === 'test')) {
     return {
       id: `demo_refund_${Date.now()}`,
       amount: amountPaise,
@@ -170,3 +163,4 @@ export async function refundPayment(paymentId, amountPaise, reason = 'Order canc
     throw new HttpError(502, CODES.REFUND_FAILED, { error: err.message }, 'Refund processing failed');
   }
 }
+

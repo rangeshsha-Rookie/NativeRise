@@ -48,8 +48,9 @@ export function OrdersPage() {
       setLoading(true);
       try {
         const res = await apiClient.get('/orders');
-        if (mounted && res?.ok && res.data) {
-          setOrders(res.data.orders || res.data || []);
+        if (mounted && res) {
+          const orderItems = res.items || res.orders || res.data?.items || res.data?.orders || (Array.isArray(res) ? res : []);
+          setOrders(orderItems);
         }
       } catch (err) {
         // Handled

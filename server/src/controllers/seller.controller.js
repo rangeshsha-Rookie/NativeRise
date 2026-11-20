@@ -723,7 +723,11 @@ export async function rejectOrder(req, res, next) {
       reason: reason || 'Rejected by seller'
     });
 
-    res.json({ id: updated._id.toString(), status: updated.status });
+    res.json({
+      id: updated._id.toString(),
+      status: updated.status,
+      order: { id: updated._id.toString(), status: updated.status }
+    });
   } catch (err) {
     next(err);
   }
@@ -978,3 +982,4 @@ export async function updateTicketStatus(req, res, next) {
     next(err);
   }
 }
+

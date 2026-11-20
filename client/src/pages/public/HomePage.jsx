@@ -42,16 +42,15 @@ export function HomePage() {
     const loadHomeData = async () => {
       try {
         const [prodRes, sellRes] = await Promise.all([
-          apiClient.get('/catalog/products?limit=8&sort=popular'),
+          apiClient.get('/products?limit=8&sort=popular'),
           apiClient.get('/catalog/sellers')
         ]);
         if (mounted) {
-          if (prodRes?.ok && prodRes.data) {
-            setFeaturedProducts(prodRes.data.products || prodRes.data);
-          }
-          if (sellRes?.ok && sellRes.data) {
-            setSellers((sellRes.data.sellers || sellRes.data || []).slice(0, 4));
-          }
+          const prodList = prodRes?.items || prodRes?.data?.items || prodRes?.data?.products || (Array.isArray(prodRes) ? prodRes : []);
+          setFeaturedProducts(prodList.slice(0, 8));
+
+          const sellList = Array.isArray(sellRes) ? sellRes : (sellRes?.sellers || sellRes?.items || sellRes?.data?.sellers || []);
+          setSellers(sellList.slice(0, 4));
         }
       } catch (err) {
         // Fallback gracefully

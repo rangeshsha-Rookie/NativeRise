@@ -22,22 +22,10 @@ router.use(requireAuth, requireRole('customer'));
 
 const createOrderSchema = z.object({
   addressId: z.string().optional(),
-  deliveryAddress: z
-    .object({
-      name: z.string().optional(),
-      phone: z.string().optional(),
-      line1: z.string().optional(),
-      line2: z.string().optional(),
-      landmark: z.string().optional(),
-      city: z.string().optional(),
-      district: z.string().optional(),
-      pincode: z.string().optional(),
-      lat: z.number(),
-      lng: z.number()
-    })
-    .optional(),
-  paymentMethod: z.enum(['RAZORPAY', 'ONLINE', 'COD']),
-  expectedTotalPaise: z.number().int().optional()
+  deliveryAddress: z.any().optional(),
+  paymentMethod: z.enum(['RAZORPAY', 'COD']),
+  expectedTotalPaise: z.number().int().optional(),
+  customerNote: z.string().optional()
 });
 
 const verifyPaymentSchema = z.object({

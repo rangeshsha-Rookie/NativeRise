@@ -88,11 +88,13 @@ export function OrderDetailPage() {
         apiClient.get(`/orders/${id}/tracking`).catch(() => null)
       ]);
 
-      if (ordRes?.ok && ordRes.data) {
-        setOrder(ordRes.data.order || ordRes.data);
+      const orderData = ordRes?.order || ordRes?.data?.order || ordRes?.data || ordRes;
+      if (orderData && (orderData.id || orderData._id || orderData.orderNo)) {
+        setOrder(orderData);
       }
-      if (trkRes?.ok && trkRes.data) {
-        setTracking(trkRes.data);
+      const trackData = trkRes?.tracking || trkRes?.data?.tracking || trkRes?.data || trkRes;
+      if (trackData && !trackData.error) {
+        setTracking(trackData);
       }
     } catch (err) {
       // Handled
@@ -121,7 +123,7 @@ export function OrderDetailPage() {
       const res = await apiClient.post(`/orders/${id}/cancel`, {
         reason: cancelReason.trim() || 'Customer requested cancellation'
       });
-      if (res?.ok) {
+      if (res?.ok || res?.id || res?._id || res?.status) {
         setCancelModalOpen(false);
         fetchOrderAndTracking();
       }
@@ -142,7 +144,7 @@ export function OrderDetailPage() {
         rating: reviewRating,
         comment: reviewComment.trim() || 'Great authentic product!'
       });
-      if (res?.ok) {
+      if (res?.ok || res?.id || res?._id) {
         setReviewModalOpen(false);
         setHasReviewed(true);
       }
@@ -162,9 +164,10 @@ export function OrderDetailPage() {
         subject: supportSubject.trim() || `Help with Order #${order.orderNo}`,
         description: supportDescription.trim() || 'Customer support inquiry'
       });
-      if (res?.ok && res.data) {
+      const ticketId = res?.ticket?.id || res?.ticket?._id || res?.id || res?._id;
+      if (ticketId) {
         setSupportModalOpen(false);
-        navigate(`/support/${res.data.ticket?._id || res.data._id}`);
+        navigate(`/support/${ticketId}`);
       }
     } catch (err) {
       alert(err.message || 'Could not create support ticket');

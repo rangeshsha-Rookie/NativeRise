@@ -22,7 +22,7 @@ describe('Phase 2 Integration Tests: Razorpay Payments, Signatures & Reconcile',
       .send({ email: 'rohan.customer@demo.nativerise.test', password: 'Demo@1234' });
     customerToken = custRes.body.token;
 
-    const prodRes = await request(app).get('/api/v1/products?limit=1');
+    const prodRes = await request(app).get('/api/v1/products?q=mango');
     testProductId = prodRes.body.items[0].id;
   });
 

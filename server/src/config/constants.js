@@ -18,6 +18,7 @@ export const AUTO_REJECT_HOURS = 6;
 export const DELIVERY_CODE_LENGTH = 4;
 export const DELIVERY_CODE_MAX_ATTEMPTS = 5;
 export const DELIVERY_CODE_LOCK_MINS = 5;
+export const DELIVERY_CODE_LOCK_MINUTES = 5;
 export const TRACK_POINT_MIN_INTERVAL_SEC = 10;
 export const TRAIL_MAX_POINTS = 500;
 export const LOCATION_STALE_SECONDS = 120;

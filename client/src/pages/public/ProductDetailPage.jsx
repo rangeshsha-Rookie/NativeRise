@@ -84,29 +84,32 @@ export function ProductDetailPage() {
       setLoading(true);
       try {
         const [prodRes, revRes] = await Promise.all([
-          apiClient.get(`/catalog/products/${id}`),
-          apiClient.get(`/catalog/products/${id}/reviews`)
+          apiClient.get(`/products/${id}`),
+          apiClient.get(`/products/${id}/reviews`)
         ]);
 
-        if (mounted && prodRes?.ok && prodRes.data) {
-          const prodData = prodRes.data.product || prodRes.data;
-          setProduct(prodData);
-          if (prodData.category) {
-            // Load similar products
-            apiClient
-              .get(`/catalog/products?category=${prodData.category}&limit=4`)
-              .then((simRes) => {
-                if (mounted && simRes?.ok && simRes.data) {
-                  const list = simRes.data.products || simRes.data || [];
-                  setSimilarProducts(list.filter((p) => (p._id || p.id) !== id));
-                }
-              })
-              .catch(() => {});
+        if (mounted && prodRes) {
+          const prodData = prodRes?.data?.product || prodRes?.product || prodRes?.data || prodRes;
+          if (prodData && (prodData._id || prodData.id)) {
+            setProduct(prodData);
+            if (prodData.category) {
+              // Load similar products
+              apiClient
+                .get(`/products?category=${prodData.category}&limit=4`)
+                .then((simRes) => {
+                  if (mounted && simRes) {
+                    const list = simRes.items || simRes.products || simRes?.data?.items || simRes?.data?.products || (Array.isArray(simRes) ? simRes : []);
+                    setSimilarProducts(list.filter((p) => (p._id || p.id) !== id));
+                  }
+                })
+                .catch(() => {});
+            }
           }
         }
 
-        if (mounted && revRes?.ok && revRes.data) {
-          setReviews(revRes.data.reviews || revRes.data || []);
+        if (mounted && revRes) {
+          const revList = revRes.reviews || revRes?.data?.reviews || (Array.isArray(revRes) ? revRes : []);
+          setReviews(revList);
         }
       } catch (err) {
         // Handled
