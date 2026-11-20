@@ -223,10 +223,11 @@ export async function removeCartItem(req, res, next) {
 export async function clearCart(req, res, next) {
   try {
     const lang = req.lang || 'en';
-    const cart = await getOrCreateCart(req.user._id);
-    cart.items = [];
-    cart.seller = null;
-    await cart.save();
+    const cart = await Cart.findOneAndUpdate(
+      { user: req.user._id },
+      { $set: { items: [], seller: null } },
+      { new: true, upsert: true }
+    );
 
     res.json(formatCart(cart, lang));
   } catch (err) {

@@ -24,6 +24,7 @@ const updateCartItemSchema = z.object({
 
 router.get('/', getCart);
 router.put('/items', validate({ body: updateCartItemSchema }), updateCartItem);
+router.post('/items', validate({ body: updateCartItemSchema }), updateCartItem);
 router.delete('/items/:productId', removeCartItem);
 router.delete('/', clearCart);
 router.get('/quote', getCartQuote);

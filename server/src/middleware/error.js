@@ -57,6 +57,8 @@ export function errorHandler(err, req, res, next) {
 
   const response = {
     ok: false,
+    code,
+    message,
     error: {
       code,
       message,

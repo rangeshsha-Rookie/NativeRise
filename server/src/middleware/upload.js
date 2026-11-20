@@ -8,7 +8,7 @@ const storage = multer.memoryStorage();
 
 const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp'];
 
-export const uploadImage = multer({
+export const upload = multer({
   storage,
   limits: {
     fileSize: IMAGE_MAX_MB * 1024 * 1024
@@ -20,6 +20,25 @@ export const uploadImage = multer({
     cb(null, true);
   }
 });
+
+export const uploadImage = upload;
+
+export const uploadSingleImage = (reqOrField = 'file', res, next) => {
+  if (typeof reqOrField === 'string') {
+    return (req, res, next) => {
+      upload.single(reqOrField)(req, res, (err) => {
+        if (err) return handleUploadError(err, req, res, next);
+        next();
+      });
+    };
+  }
+  // Called directly as (req, res, next)
+  const req = reqOrField;
+  upload.single('file')(req, res, (err) => {
+    if (err) return handleUploadError(err, req, res, next);
+    next();
+  });
+};
 
 export function handleUploadError(err, req, res, next) {
   if (err instanceof multer.MulterError) {
