@@ -64,5 +64,10 @@ const userSchema = new mongoose.Schema(
 
 userSchema.index({ role: 1 });
 
+userSchema.methods.comparePassword = async function (candidatePassword) {
+  const bcrypt = await import('bcryptjs');
+  return bcrypt.default.compare(candidatePassword, this.passwordHash);
+};
+
 export const User = mongoose.models.User || mongoose.model('User', userSchema);
 export default User;

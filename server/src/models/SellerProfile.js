@@ -67,7 +67,8 @@ const sellerProfileSchema = new mongoose.Schema(
     coverUrl: { type: String, default: '' },
     ratingSum: { type: Number, default: 0 },
     ratingCount: { type: Number, default: 0 },
-    ratingAvg: { type: Number, default: 0 }
+    ratingAvg: { type: Number, default: 0 },
+    isDemo: { type: Boolean, default: false }
   },
   { timestamps: true }
 );

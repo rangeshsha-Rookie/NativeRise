@@ -45,6 +45,10 @@ const partnerProfileSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Order',
       default: null
+    },
+    isDemo: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true }

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="96" fill="#8C6D58" stroke="#FDFBF7" stroke-width="8"/>
+  <circle cx="100" cy="100" r="76" fill="#735442"/>
+  <text x="100" y="118" font-family="system-ui, sans-serif" font-size="52" font-weight="700" fill="#FDFBF7" text-anchor="middle">
+    S7
+  </text>
+</svg>

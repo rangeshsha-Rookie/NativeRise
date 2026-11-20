@@ -86,7 +86,7 @@ export async function roadDistanceKm(a, b) {
         return result;
       }
     }
-  } catch (err) {
+  } catch {
     // Timeout or network failure: fallback to haversine * 1.3
   }
 

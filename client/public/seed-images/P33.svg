@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FBF8F3"/>
+      <stop offset="100%" stop-color="#EFE8DE"/>
+    </linearGradient>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#E5DCD0" stroke-width="0.8" opacity="0.6"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <rect width="800" height="600" fill="url(#grid)"/>
+
+  <!-- Inner Decorative Card -->
+  <rect x="40" y="40" width="720" height="520" rx="24" fill="#FFFFFF" fill-opacity="0.85" stroke="#DCCEC0" stroke-width="2"/>
+
+  <!-- Top Category Pill -->
+  <rect x="70" y="70" width="220" height="44" rx="22" fill="#8C6D58" fill-opacity="0.15"/>
+  <text x="180" y="98" font-family="system-ui, -apple-system, sans-serif" font-size="16" font-weight="600" fill="#6A4E3D" text-anchor="middle">
+    JAGGERY SWEETS
+  </text>
+
+  <!-- Product Code Pill -->
+  <rect x="630" y="70" width="100" height="44" rx="22" fill="#EAE2D7"/>
+  <text x="680" y="98" font-family="monospace" font-size="18" font-weight="700" fill="#523E32" text-anchor="middle">
+    P33
+  </text>
+
+  <!-- Center Decorative Emblem -->
+  <circle cx="400" cy="270" r="110" fill="#F4EFE8" stroke="#D3C3B1" stroke-width="2"/>
+  <circle cx="400" cy="270" r="88" fill="#E8DEC9" fill-opacity="0.5"/>
+  <path d="M400,210 C420,240 450,260 450,290 C450,320 425,340 400,340 C375,340 350,320 350,290 C350,260 380,240 400,210 Z" fill="#2E7D32" fill-opacity="0.85"/>
+  <circle cx="400" cy="290" r="14" fill="#FAF6EE"/>
+
+  <!-- English Title -->
+  <text x="400" y="430" font-family="system-ui, -apple-system, sans-serif" font-size="34" font-weight="700" fill="#2B2118" text-anchor="middle">
+    Til Gul Laddu
+  </text>
+
+  <!-- Marathi Title -->
+  <text x="400" y="475" font-family="system-ui, 'Noto Sans Devanagari', sans-serif" font-size="28" font-weight="600" fill="#6A4E3D" text-anchor="middle">
+    तिळगुळाचे लाडू
+  </text>
+
+  <!-- Bottom Details Bar -->
+  <line x1="80" y1="505" x2="720" y2="505" stroke="#E6DCD1" stroke-width="1.5"/>
+
+  <!-- Quantity -->
+  <text x="120" y="538" font-family="system-ui, sans-serif" font-size="18" font-weight="500" fill="#756152">
+    Net: <tspan font-weight="700" fill="#2B2118">250 g</tspan>
+  </text>
+
+  <!-- Price Badge -->
+  <text x="680" y="538" font-family="system-ui, sans-serif" font-size="24" font-weight="800" fill="#2E7D32" text-anchor="end">
+    ₹200
+  </text>
+</svg>

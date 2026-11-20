@@ -55,4 +55,5 @@ export const ErrorCodes = {
   SHOP_INCOMPLETE: 'SHOP_INCOMPLETE'
 };
 
+export const CODES = ErrorCodes;
 export default ErrorCodes;
