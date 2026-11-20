@@ -20,12 +20,19 @@ app.use(
     origin: (origin, callback) => {
       // Allow requests with no origin (e.g. mobile apps, curl, server-to-server)
       if (!origin) return callback(null, true);
-      if (config.clientOrigins.includes('*') || config.clientOrigins.includes(origin)) {
+      const isAllowed =
+        config.clientOrigins.includes('*') ||
+        config.clientOrigins.includes(origin) ||
+        origin.endsWith('.github.io') ||
+        origin.includes('localhost') ||
+        origin.includes('127.0.0.1');
+
+      if (isAllowed) {
         return callback(null, true);
       }
       callback(null, false);
     },
-    credentials: false,
+    credentials: true,
     allowedHeaders: ['Authorization', 'Content-Type', 'Accept-Language', 'Idempotency-Key']
   })
 );
