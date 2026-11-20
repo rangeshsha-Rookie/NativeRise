@@ -66,9 +66,75 @@ import mrValidation from './locales/mr/validation.json';
 import mrA11y from './locales/mr/a11y.json';
 import mrFooter from './locales/mr/footer.json';
 
+const enCombined = {
+  ...enCommon,
+  nav: enNav,
+  auth: enAuth,
+  home: enHome,
+  catalog: enCatalog,
+  product: enProduct,
+  cart: enCart,
+  checkout: enCheckout,
+  orders: enOrders,
+  tracking: enTracking,
+  reviews: enReviews,
+  support: enSupport,
+  assistant: enAssistant,
+  account: enAccount,
+  seller: enSeller,
+  sellerOrders: enSellerOrders,
+  sellerProducts: enSellerProducts,
+  snap: enSnap,
+  whatToSell: enWhatToSell,
+  growth: enGrowth,
+  earnings: enEarnings,
+  partner: enPartner,
+  partnerJobs: enPartnerJobs,
+  map: enMap,
+  status: enStatus,
+  units: enUnits,
+  errors: enErrors,
+  validation: enValidation,
+  a11y: enA11y,
+  footer: enFooter
+};
+
+const mrCombined = {
+  ...mrCommon,
+  nav: mrNav,
+  auth: mrAuth,
+  home: mrHome,
+  catalog: mrCatalog,
+  product: mrProduct,
+  cart: mrCart,
+  checkout: mrCheckout,
+  orders: mrOrders,
+  tracking: mrTracking,
+  reviews: mrReviews,
+  support: mrSupport,
+  assistant: mrAssistant,
+  account: mrAccount,
+  seller: mrSeller,
+  sellerOrders: mrSellerOrders,
+  sellerProducts: mrSellerProducts,
+  snap: mrSnap,
+  whatToSell: mrWhatToSell,
+  growth: mrGrowth,
+  earnings: mrEarnings,
+  partner: mrPartner,
+  partnerJobs: mrPartnerJobs,
+  map: mrMap,
+  status: mrStatus,
+  units: mrUnits,
+  errors: mrErrors,
+  validation: mrValidation,
+  a11y: mrA11y,
+  footer: mrFooter
+};
+
 const resources = {
   en: {
-    common: enCommon,
+    common: enCombined,
     nav: enNav,
     auth: enAuth,
     home: enHome,
@@ -100,7 +166,7 @@ const resources = {
     footer: enFooter
   },
   mr: {
-    common: mrCommon,
+    common: mrCombined,
     nav: mrNav,
     auth: mrAuth,
     home: mrHome,

@@ -10,21 +10,24 @@ import {
   HeartHandshake,
   Sparkles,
   ShoppingBag,
-  Store
+  Store,
+  CheckCircle2,
+  Play
 } from 'lucide-react';
 import apiClient from '../../api/client';
 import ProductCard from '../../components/ui/ProductCard';
 import LocationPicker from '../../components/map/LocationPicker';
+import { CATEGORY_IMAGES, ARTISAN_PORTRAITS } from '../../utils/productImages';
 
 const CATEGORIES = [
-  { slug: 'pickles', en: 'Pickles', mr: 'लोणची', icon: '🥒', bg: 'bg-amber-100' },
-  { slug: 'masalas', en: 'Spices & Masalas', mr: 'मसाले', icon: '🌶️', bg: 'bg-red-100' },
-  { slug: 'sweets_snacks', en: 'Sweets & Snacks', mr: 'फराळ व मिठाई', icon: '🍪', bg: 'bg-orange-100' },
-  { slug: 'grains_flours', en: 'Grains & Flours', mr: 'धान्य व पिठे', icon: '🌾', bg: 'bg-yellow-100' },
-  { slug: 'honey_preserves', en: 'Honey & Preserves', mr: 'मध व जॅम', icon: '🍯', bg: 'bg-amber-100' },
-  { slug: 'dairy_ghee', en: 'Village Ghee & Dairy', mr: 'साजुक तूप व दुग्धजन्य', icon: '🥛', bg: 'bg-blue-100' },
-  { slug: 'handicrafts', en: 'Handicrafts', mr: 'हस्तकला', icon: '🧺', bg: 'bg-emerald-100' },
-  { slug: 'personal_care', en: 'Personal Care', mr: 'नैसर्गिक सौंदर्यप्रसाधने', icon: '🌿', bg: 'bg-teal-100' }
+  { slug: 'pickles', en: 'Pickles', mr: 'लोणची', image: CATEGORY_IMAGES.pickles },
+  { slug: 'masalas', en: 'Spices & Masalas', mr: 'मसाले', image: CATEGORY_IMAGES.masalas },
+  { slug: 'sweets_snacks', en: 'Sweets & Snacks', mr: 'फराळ व मिठाई', image: CATEGORY_IMAGES.sweets_snacks },
+  { slug: 'grains_flours', en: 'Grains & Flours', mr: 'धान्य व पिठे', image: CATEGORY_IMAGES.grains_flours },
+  { slug: 'honey_preserves', en: 'Honey & Preserves', mr: 'मध व जॅम', image: CATEGORY_IMAGES.honey_preserves },
+  { slug: 'dairy_ghee', en: 'Village Ghee & Dairy', mr: 'साजुक तूप व दुग्धजन्य', image: CATEGORY_IMAGES.dairy_ghee },
+  { slug: 'handicrafts', en: 'Handicrafts', mr: 'हस्तकला', image: CATEGORY_IMAGES.handicrafts },
+  { slug: 'personal_care', en: 'Personal Care', mr: 'नैसर्गिक सौंदर्यप्रसाधने', image: CATEGORY_IMAGES.personal_care }
 ];
 
 export function HomePage() {
@@ -52,7 +55,7 @@ export function HomePage() {
           const sellList = Array.isArray(sellRes) ? sellRes : (sellRes?.sellers || sellRes?.items || sellRes?.data?.sellers || []);
           setSellers(sellList.slice(0, 4));
         }
-      } catch (err) {
+      } catch {
         // Fallback gracefully
       } finally {
         if (mounted) setLoading(false);
@@ -66,88 +69,130 @@ export function HomePage() {
   }, []);
 
   return (
-    <div className="space-y-12 pb-16">
-      {/* 1. Hero Section with Tagline */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary-100/50 via-cream to-cream pt-8 sm:pt-14 pb-12 sm:pb-16 border-b border-line">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
-          <div className="max-w-3xl space-y-6">
-            {/* Tagline Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface border border-line text-xs font-semibold text-clay shadow-sm">
-              <Sparkles className="w-4 h-4 text-primary-800" />
-              <span>{isMr ? '१००% अस्सल गावरान चव' : '100% Authentic Rural Marketplace'}</span>
-            </div>
+    <div className="space-y-16 pb-20">
+      {/* 1. Hero Section (GrameenBazaar Premium Split Layout) */}
+      <section className="relative overflow-hidden bg-gradient-to-b from-[#F5EFE6] via-cream to-cream pt-10 sm:pt-16 pb-12 sm:pb-20 border-b border-line">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+            {/* Left Content Column */}
+            <div className="lg:col-span-7 space-y-6">
+              {/* Badge: Support Rural India / Maharashtra */}
+              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200/80 text-xs font-bold text-emerald-800 shadow-sm">
+                <span className="text-base">🌾</span>
+                <span>{isMr ? 'ग्रामीण भारताला व महाराष्ट्राला पाठबळ' : 'Support Rural Maharashtra'}</span>
+              </div>
 
-            {/* Tagline per spec: From the village to your doorstep / गावापासून तुमच्या दारापर्यंत */}
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-serif font-bold text-ink tracking-tight leading-tight">
-              {isMr ? (
-                <>
-                  <span className="text-clay">गावापासून</span> तुमच्या दारापर्यंत.
-                </>
-              ) : (
-                <>
-                  From the <span className="text-clay">village</span> to your doorstep.
-                </>
-              )}
-            </h1>
+              {/* Headline with highlighted 'village' */}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-black text-ink tracking-tight leading-[1.15]">
+                {isMr ? (
+                  <>
+                    गावापासून <span className="text-emerald-700">तुमच्या दारापर्यंत</span>.
+                  </>
+                ) : (
+                  <>
+                    From the <span className="text-emerald-700">village</span> to your doorstep.
+                  </>
+                )}
+              </h1>
 
-            <p className="text-base sm:text-xl text-ink-2 leading-relaxed">
-              {isMr
-                ? 'महाराष्ट्रातील ग्रामीण महिला बचत गट, कारागीर आणि शेतकऱ्यांची अस्सल उत्पादने — थेट त्यांच्या घरातून तुमच्या दारापर्यंत, जलद ट्रॅकिंगसह.'
-                : 'Direct marketplace connecting rural Maharashtra entrepreneurs, women SHGs, and small farmers directly to your home with live checkpoint delivery.'}
-            </p>
+              {/* Subheading */}
+              <p className="text-base sm:text-lg text-ink-2/90 max-w-xl leading-relaxed">
+                {isMr
+                  ? 'महाराष्ट्रातील ग्रामीण महिला बचत गट, हस्तकला कारागीर आणि लहान शेतकऱ्यांची अस्सल उत्पादने — थेट त्यांच्या घरातून तुमच्या दारापर्यंत.'
+                  : 'Discover authentic, handcrafted and locally sourced products from rural Maharashtra. Support our villages, empower local artisans.'}
+              </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
-              <Link
-                to="/products"
-                className="h-12 px-7 rounded-full bg-primary text-ink font-semibold flex items-center gap-2 hover:bg-primary-600 active:scale-95 transition-all shadow-sm"
-              >
-                <ShoppingBag className="w-5 h-5" />
-                <span>{isMr ? 'उत्पादने पहा' : 'Explore Products'}</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                to="/shops"
-                className="h-12 px-6 rounded-full bg-surface border border-ink text-ink font-semibold flex items-center gap-2 hover:bg-cream-2 active:scale-95 transition-all"
-              >
-                <Store className="w-5 h-5 text-clay" />
-                <span>{isMr ? 'गावची दुकाने' : 'Village Shops'}</span>
-              </Link>
-            </div>
+              {/* CTA Buttons */}
+              <div className="flex flex-wrap items-center gap-4 pt-2">
+                <Link
+                  to="/products"
+                  className="h-13 px-8 rounded-full bg-emerald-700 text-white font-bold flex items-center gap-2.5 hover:bg-emerald-800 active:scale-95 transition-all shadow-md"
+                >
+                  <ShoppingBag className="w-5 h-5 text-amber-200" />
+                  <span>{isMr ? 'उत्पादने पहा' : 'Explore Products'}</span>
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
 
-            {/* Feasibility Estimator Trigger */}
-            <div className="pt-4">
-              <button
-                type="button"
-                onClick={() => setShowLocationPicker(true)}
-                className="inline-flex items-center gap-2 text-sm text-ink-2 hover:text-ink underline underline-offset-4"
-              >
-                <MapPin className="w-4 h-4 text-clay" />
-                <span>
-                  {isMr
-                    ? 'तुमच्या गावात डिलिव्हरी उपलब्ध आहे का? तपासा'
-                    : 'Check delivery feasibility to your area'}
+                <Link
+                  to="/shops"
+                  className="h-13 px-7 rounded-full bg-surface border-2 border-stone-300 text-ink font-bold flex items-center gap-2 hover:bg-stone-50 active:scale-95 transition-all shadow-sm"
+                >
+                  <Store className="w-5 h-5 text-clay" />
+                  <span>{isMr ? 'गावची दुकाने' : 'Village Shops'}</span>
+                </Link>
+              </div>
+
+              {/* Trust Bullets */}
+              <div className="pt-2 flex flex-wrap items-center gap-4 text-xs font-semibold text-ink-2">
+                <span className="flex items-center gap-1.5 text-emerald-800">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  {isMr ? '१००% अस्सल गावरान' : 'Trusted & Authentic'}
                 </span>
-              </button>
+                <span>•</span>
+                <span className="flex items-center gap-1.5 text-emerald-800">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  {isMr ? 'थेट उत्पादकांकडून' : 'Direct from Artisans'}
+                </span>
+                <span>•</span>
+                <span className="flex items-center gap-1.5 text-emerald-800">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  {isMr ? 'थेट GPS ट्रॅकिंग' : 'Live GPS Delivery'}
+                </span>
+              </div>
+
+              {/* Feasibility Check Link */}
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setShowLocationPicker(true)}
+                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-clay hover:text-emerald-800 underline underline-offset-4"
+                >
+                  <MapPin className="w-4 h-4 text-emerald-700 shrink-0" />
+                  <span>
+                    {isMr
+                      ? 'तुमच्या गावात डिलिव्हरी उपलब्ध आहे का? येथे तपासा'
+                      : 'Check delivery feasibility to your area'}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right Visual Artwork (Rural Village Cottage & Bull Cart Scenery) */}
+            <div className="lg:col-span-5 relative">
+              <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-2xl bg-amber-50">
+                <img
+                  src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=900&auto=format&fit=crop&q=80"
+                  alt="Rural Village Life"
+                  className="w-full h-[360px] sm:h-[420px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex flex-col justify-end p-6 text-white">
+                  <span className="text-xs uppercase font-bold tracking-widest text-amber-300">
+                    {isMr ? 'हस्तनिर्मित व अस्सल' : 'Direct Village Heritage'}
+                  </span>
+                  <p className="text-lg font-serif font-bold text-white mt-1">
+                    {isMr ? 'गावची पारंपरिक कला व शेतमालाची समृद्धी' : 'Artisans, Self-Help Groups & Organic Cultivators'}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Categories Grid */}
-      <section className="max-w-[1200px] mx-auto px-4 sm:px-8">
+      {/* 2. Shop by Category (Photorealistic Rounded Cards) */}
+      <section className="max-w-[1300px] mx-auto px-4 sm:px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
               {isMr ? 'विभागानुसार खरेदी करा' : 'Shop by Category'}
             </h2>
-            <p className="text-sm text-ink-2 mt-1">
-              {isMr ? 'हस्तनिर्मित व घरगुती उत्पादने' : 'Handcrafted, homemade village essentials'}
+            <p className="text-xs sm:text-sm text-ink-2 mt-1">
+              {isMr ? 'अस्सल गावरान आणि घरगुती उत्पादने' : 'Explore our wide range of authentic village products'}
             </p>
           </div>
           <Link
             to="/products"
-            className="text-sm font-semibold text-clay hover:text-primary-800 flex items-center gap-1"
+            className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
           >
             <span>{isMr ? 'सर्व पहा' : 'View All'}</span>
             <ArrowRight className="w-4 h-4" />
@@ -160,14 +205,16 @@ export function HomePage() {
               key={cat.slug}
               type="button"
               onClick={() => navigate(`/products?category=${cat.slug}`)}
-              className="group flex flex-col items-center p-4 bg-surface border border-line rounded-card hover:border-ink hover:shadow-md transition-all text-center"
+              className="group flex flex-col items-center p-3 bg-surface border border-line/80 rounded-2xl hover:border-emerald-600 hover:shadow-lg hover:-translate-y-1 transition-all text-center"
             >
-              <div
-                className={`w-14 h-14 rounded-full ${cat.bg} flex items-center justify-center text-2xl mb-2.5 group-hover:scale-110 transition-transform`}
-              >
-                {cat.icon}
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl overflow-hidden bg-[#FAF7F2] p-1.5 mb-2.5 shadow-inner">
+                <img
+                  src={cat.image}
+                  alt={isMr ? cat.mr : cat.en}
+                  className="w-full h-full object-cover rounded-xl group-hover:scale-110 transition-transform duration-300"
+                />
               </div>
-              <span className="text-xs sm:text-sm font-semibold text-ink group-hover:text-primary-800">
+              <span className="text-xs font-bold text-ink group-hover:text-emerald-700 line-clamp-1">
                 {isMr ? cat.mr : cat.en}
               </span>
             </button>
@@ -175,30 +222,30 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 3. Featured / Trending Products */}
-      <section className="max-w-[1200px] mx-auto px-4 sm:px-8">
+      {/* 3. Featured Products Grid (High Value Photorealistic Cards) */}
+      <section className="max-w-[1300px] mx-auto px-4 sm:px-8">
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
-              {isMr ? 'लोकप्रिय उत्पादने' : 'Featured Village Products'}
+              {isMr ? 'लोकप्रिय गावरान उत्पादने' : 'Featured Village Products'}
             </h2>
-            <p className="text-sm text-ink-2 mt-1">
-              {isMr ? 'ग्राहकांची पहिली पसंती' : 'Most loved by customers this week'}
+            <p className="text-xs sm:text-sm text-ink-2 mt-1">
+              {isMr ? 'ग्राहकांची पहिली पसंती असणारी उत्पादने' : 'Handpicked authentic products from rural artisans'}
             </p>
           </div>
           <Link
             to="/products?sort=popular"
-            className="text-sm font-semibold text-clay hover:text-primary-800 flex items-center gap-1"
+            className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
           >
-            <span>{isMr ? 'सर्व उत्पादने' : 'All Products'}</span>
+            <span>{isMr ? 'सर्व उत्पादने' : 'View More'}</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         {loading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[1, 2, 3, 4].map((n) => (
-              <div key={n} className="h-72 bg-cream-2 rounded-card animate-pulse" />
+            {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
+              <div key={n} className="h-80 bg-cream-2 rounded-2xl animate-pulse" />
             ))}
           </div>
         ) : featuredProducts.length > 0 ? (
@@ -208,133 +255,127 @@ export function HomePage() {
             ))}
           </div>
         ) : (
-          <p className="text-ink-2">{isMr ? 'उत्पादने उपलब्ध नाहीत' : 'No products found'}</p>
+          <p className="text-ink-2 text-sm">{isMr ? 'उत्पादने उपलब्ध नाहीत' : 'No products found'}</p>
         )}
       </section>
 
-      {/* 4. Rural Entrepreneurs / Sellers Spotlight */}
-      <section className="bg-surface border-y border-line py-12 sm:py-16">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-8">
+      {/* 4. Meet Our Village Entrepreneurs (Warm Artisan Profile Cards) */}
+      <section className="bg-gradient-to-b from-[#F7F2EA] to-cream border-y border-line py-14 sm:py-18">
+        <div className="max-w-[1300px] mx-auto px-4 sm:px-8">
           <div className="flex items-center justify-between mb-8">
             <div>
               <h2 className="text-2xl sm:text-3xl font-serif font-bold text-ink">
-                {isMr ? 'गावचे उद्योजक आणि त्यांची गोष्ट' : 'Meet Our Village Entrepreneurs'}
+                {isMr ? 'भेटा आमच्या ग्रामीण उद्योजकांना' : 'Meet Our Village Entrepreneurs'}
               </h2>
-              <p className="text-sm text-ink-2 mt-1">
-                {isMr
-                  ? 'थेट उत्पादक, बचत गट आणि शेतकरी यांच्याकडून खरेदी करा'
-                  : 'Empowering rural women and small producers across Maharashtra'}
+              <p className="text-xs sm:text-sm text-ink-2 mt-1">
+                {isMr ? 'खरे लोक. खऱ्या गोष्टी. खरा प्रभाव.' : 'Real people. Real stories. Real impact.'}
               </p>
             </div>
             <Link
               to="/shops"
-              className="text-sm font-semibold text-clay hover:text-primary-800 flex items-center gap-1"
+              className="text-xs sm:text-sm font-bold text-emerald-700 hover:text-emerald-800 flex items-center gap-1"
             >
-              <span>{isMr ? 'सर्व दुकाने' : 'All Shops'}</span>
+              <span>{isMr ? 'सर्व दुकाने' : 'View More'}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sellers.map((s) => {
-              const shopTitle = s.shopName?.[isMr ? 'mr' : 'en'] || s.shopName?.mr || s.shopName?.en || 'Shop';
-              const story = s.story?.[isMr ? 'mr' : 'en'] || s.story?.mr || s.story?.en || '';
-              const village = s.location?.village || '';
-              const district = s.location?.district || '';
-
-              return (
-                <div
-                  key={s._id || s.id}
-                  className="bg-cream border border-line rounded-card p-5 flex flex-col justify-between hover:shadow-md transition-all"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-clay text-cream flex items-center justify-center font-bold text-lg overflow-hidden shrink-0">
-                        {s.shopPhoto ? (
-                          <img src={s.shopPhoto} alt={shopTitle} className="w-full h-full object-cover" />
-                        ) : (
-                          shopTitle[0]
-                        )}
-                      </div>
-                      <div className="truncate">
-                        <h3 className="font-bold text-ink truncate">{shopTitle}</h3>
-                        <p className="text-xs text-ink-2 flex items-center gap-1">
-                          <MapPin className="w-3.5 h-3.5 text-clay shrink-0" />
-                          <span>{village ? `${village}, ${district}` : district}</span>
-                        </p>
-                      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+            {Object.values(ARTISAN_PORTRAITS).map((artisan, idx) => (
+              <div
+                key={idx}
+                className="bg-surface border border-line/90 rounded-2xl p-5 flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3.5">
+                    <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-600 shadow-sm shrink-0">
+                      <img
+                        src={artisan.image}
+                        alt={isMr ? artisan.nameMr : artisan.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <p className="text-xs text-ink-2 line-clamp-3 leading-relaxed">
-                      {story}
-                    </p>
+                    <div>
+                      <h3 className="font-bold text-ink text-sm sm:text-base leading-snug">
+                        {isMr ? artisan.nameMr : artisan.name}
+                      </h3>
+                      <p className="text-[11px] font-semibold text-emerald-800 flex items-center gap-1 mt-0.5">
+                        <MapPin className="w-3 h-3 text-clay shrink-0" />
+                        <span>{isMr ? artisan.locationMr : artisan.location}</span>
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-line flex items-center justify-between">
-                    <span className="text-xs text-ink-2">
-                      ⭐ {s.ratingAverage ? s.ratingAverage.toFixed(1) : '5.0'}
-                    </span>
-                    <Link
-                      to={`/shops/${s._id || s.id}`}
-                      className="text-xs font-semibold text-clay hover:underline flex items-center gap-1"
-                    >
-                      <span>{isMr ? 'दुकान पहा' : 'Visit Shop'}</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </Link>
-                  </div>
+                  <p className="text-xs text-ink-2/90 leading-relaxed italic border-l-2 border-amber-400 pl-3">
+                    &ldquo;{isMr ? artisan.quoteMr : artisan.quote}&rdquo;
+                  </p>
                 </div>
-              );
-            })}
+
+                <div className="mt-5 pt-3 border-t border-line/70 flex items-center justify-between">
+                  <span className="text-[11px] font-bold text-amber-600">
+                    ⭐ 4.9 (Artisan)
+                  </span>
+                  <Link
+                    to="/shops"
+                    className="text-xs font-bold text-emerald-700 hover:underline flex items-center gap-1"
+                  >
+                    <span>{isMr ? 'दुकान पहा' : 'Visit Shop'}</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 5. Trust & Transparency Guarantees */}
-      <section className="max-w-[1200px] mx-auto px-4 sm:px-8">
+      {/* 5. Value Propositions / Trust Guarantees */}
+      <section className="max-w-[1300px] mx-auto px-4 sm:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-6 bg-surface border border-line rounded-card flex items-start gap-4">
-            <div className="p-3 bg-amber-100 text-amber-800 rounded-2xl shrink-0">
-              <ShieldCheck className="w-6 h-6" />
+          <div className="p-6 bg-surface border border-line/90 rounded-2xl flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-emerald-100 text-emerald-800 rounded-2xl flex items-center justify-center text-xl shrink-0">
+              🌿
             </div>
             <div>
-              <h3 className="font-bold text-ink mb-1">
-                {isMr ? '१००% अस्सल गावरान' : '100% Authentic Village Origin'}
+              <h3 className="font-bold text-ink mb-1 text-sm sm:text-base">
+                {isMr ? '१००% अस्सल गावरान उत्पादने' : '100% Authentic Village Products'}
               </h3>
               <p className="text-xs text-ink-2 leading-relaxed">
                 {isMr
-                  ? 'कोणतीही भेसळ नाही. प्रत्येक उत्पादन गावातील शेतकरी किंवा बचत गटाकडून प्रत्यक्ष तयार केलेले.'
-                  : 'Zero adulteration. Pure farm-made and women-crafted products straight from the source.'}
+                  ? 'कोणतीही भेसळ नाही. ग्रामीण महिला बचत गट, शेतकरी आणि कारागिरांकडून थेट.'
+                  : 'Direct from trusted artisans and farmers. Zero adulteration, pure traditional heritage.'}
               </p>
             </div>
           </div>
 
-          <div className="p-6 bg-surface border border-line rounded-card flex items-start gap-4">
-            <div className="p-3 bg-blue-100 text-blue-800 rounded-2xl shrink-0">
-              <Truck className="w-6 h-6" />
+          <div className="p-6 bg-surface border border-line/90 rounded-2xl flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-blue-100 text-blue-800 rounded-2xl flex items-center justify-center text-xl shrink-0">
+              🤝
             </div>
             <div>
-              <h3 className="font-bold text-ink">
-                {isMr ? 'थेट चेकपॉईंट ट्रॅकिंग' : 'Live Checkpoint Delivery'}
+              <h3 className="font-bold text-ink mb-1 text-sm sm:text-base">
+                {isMr ? 'ग्रामीण अर्थव्यवस्थेला बळ' : 'Support Rural Economy'}
               </h3>
               <p className="text-xs text-ink-2 leading-relaxed">
                 {isMr
-                  ? 'डिलिव्हरी पार्टनरच्या खऱ्याखुऱ्या GPS लोकेशनसह नकाशावर थेट ट्रॅकिंग. सुरक्षित ४-अंकी कोड.'
-                  : 'Track partner real GPS checkpoints on a live map. Secure 4-digit code on arrival.'}
+                  ? 'मध्यस्थांशिवाय तुमची रक्कम थेट ग्रामीण उत्पादकांपर्यंत पोहोचते व उपजीविका निर्माण करते.'
+                  : 'Empower villages and create sustainable livelihoods with every single purchase.'}
               </p>
             </div>
           </div>
 
-          <div className="p-6 bg-surface border border-line rounded-card flex items-start gap-4">
-            <div className="p-3 bg-emerald-100 text-emerald-800 rounded-2xl shrink-0">
-              <HeartHandshake className="w-6 h-6" />
+          <div className="p-6 bg-surface border border-line/90 rounded-2xl flex items-start gap-4 shadow-sm hover:shadow-md transition-shadow">
+            <div className="w-12 h-12 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center text-xl shrink-0">
+              🛡️
             </div>
             <div>
-              <h3 className="font-bold text-ink">
-                {isMr ? 'ग्रामीण उद्योजकांना थेट आधार' : 'Direct Support to Rural Income'}
+              <h3 className="font-bold text-ink mb-1 text-sm sm:text-base">
+                {isMr ? 'सुरक्षित व खात्रीशीर खरेदी' : 'Secure & Hassle-Free Shopping'}
               </h3>
               <p className="text-xs text-ink-2 leading-relaxed">
                 {isMr
-                  ? 'मध्यस्थांशिवाय तुमची रक्कम थेट ग्रामीण उत्पादकांपर्यंत पोहोचते.'
-                  : 'No middlemen. Your money goes straight to empowering rural families and communities.'}
+                  ? 'थेट GPS ट्रॅकिंग, सुरक्षित ४-अंकी डिलिव्हरी कोड आणि कॅश ऑन डिलिव्हरी पर्याय.'
+                  : 'Live GPS checkpoint tracking, 4-digit verification code, and Cash on Delivery.'}
               </p>
             </div>
           </div>

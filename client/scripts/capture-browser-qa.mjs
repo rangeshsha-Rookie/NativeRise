@@ -27,7 +27,7 @@ async function runQA() {
   console.log('Navigating to Home Page (EN)...');
   await page.goto('http://localhost:5173/');
   await page.waitForLoadState('networkidle');
-  await page.screenshot({ path: path.join(outDir, '01-home-en.png'), fullPage: false });
+  await page.screenshot({ path: path.join(outDir, '01-home-en.png'), fullPage: true });
 
   // 2. Switch Language to Marathi
   console.log('Switching to Marathi...');
@@ -35,7 +35,7 @@ async function runQA() {
   if (await mrBtn.isVisible().catch(() => false)) {
     await mrBtn.click();
     await page.waitForTimeout(1000);
-    await page.screenshot({ path: path.join(outDir, '02-home-mr.png'), fullPage: false });
+    await page.screenshot({ path: path.join(outDir, '02-home-mr.png'), fullPage: true });
   }
 
   // 3. Login Page with Quick Demo Logins

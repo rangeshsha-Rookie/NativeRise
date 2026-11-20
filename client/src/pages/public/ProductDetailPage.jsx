@@ -20,6 +20,7 @@ import { useAuth } from '../../context/AuthContext';
 import { RatingStars } from '../../components/ui/RatingStars';
 import ProductCard from '../../components/ui/ProductCard';
 import LocationPicker from '../../components/map/LocationPicker';
+import { getProductPhoto } from '../../utils/productImages';
 import clsx from 'clsx';
 
 export function ProductDetailPage() {
@@ -235,7 +236,10 @@ export function ProductDetailPage() {
   const isLowStock = product.stock > 0 && product.stock <= 5;
   const maxAllowedQty = Math.min(10, product.stock || 1);
 
-  const images = product.images?.length > 0 ? product.images : ['/placeholder-product.jpg'];
+  const photoUrl = getProductPhoto(product);
+  const images = product.images?.length > 0 && product.images[0].startsWith('http')
+    ? product.images
+    : [photoUrl];
 
   return (
     <div className="max-w-[1200px] mx-auto px-4 sm:px-8 py-6 sm:py-10 space-y-12">
