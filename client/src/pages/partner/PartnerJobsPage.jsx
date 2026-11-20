@@ -31,8 +31,9 @@ export function PartnerJobsPage() {
     setErrorMessage('');
     try {
       const res = await apiClient.get('/partner/jobs');
-      if (res?.ok && res.data) {
-        setJobs(res.data.jobs || res.data || []);
+      const data = res?.data || res;
+      if (data) {
+        setJobs(data.jobs || (Array.isArray(data) ? data : []));
       }
     } catch (err) {
       // Handled

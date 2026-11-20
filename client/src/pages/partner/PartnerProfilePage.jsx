@@ -24,8 +24,8 @@ export function PartnerProfilePage() {
     apiClient
       .get('/partner/profile')
       .then((res) => {
-        if (res?.ok && res.data) {
-          const p = res.data;
+        const p = res?.data || res;
+        if (p) {
           setVehicleType(p.vehicleType || 'BIKE');
           setVehicleNumber(p.vehicleNumber || '');
           setServiceRadiusKm(p.serviceRadiusKm || 25);

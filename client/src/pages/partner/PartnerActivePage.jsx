@@ -57,8 +57,9 @@ export function PartnerActivePage() {
   const fetchActive = async () => {
     try {
       const res = await apiClient.get('/partner/active');
-      if (res?.ok && res.data) {
-        setOrder(res.data.order || res.data);
+      const data = res?.data || res;
+      if (data && (data.order || data._id)) {
+        setOrder(data.order || data);
       } else {
         setOrder(null);
       }

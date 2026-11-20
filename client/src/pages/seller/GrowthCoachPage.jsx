@@ -26,10 +26,11 @@ export function GrowthCoachPage() {
     if (showRefresh) setRefreshing(true);
     try {
       const res = await apiClient.get('/ai/growth-coach');
-      if (res?.ok && res.data) {
-        setReport(res.data.report || res.data);
+      const data = res?.data || res;
+      if (data) {
+        setReport(data.report || data);
       }
-    } catch (err) {
+    } catch {
       // Handled
     } finally {
       setLoading(false);
@@ -160,10 +161,10 @@ export function GrowthCoachPage() {
               makeMore.map((m, idx) => (
                 <div key={idx} className="p-4 bg-cream-2 rounded-xl border border-line space-y-1">
                   <span className="font-bold text-sm text-ink block">
-                    {m.productName || m.name || 'Top Product'}
+                    {m.title || m.productName || m.name || 'Top Product'}
                   </span>
                   <p className="text-xs text-ink-2">
-                    {m.advice || m.reason || (isMr ? 'दुप्पट साठा तयार ठेवा.' : 'Double current batch size.')}
+                    {m.why ? `${m.why} ${m.action ? `Action: ${m.action}` : ''}` : m.advice || m.reason || (isMr ? 'दुप्पट साठा तयार ठेवा.' : 'Double current batch size.')}
                   </p>
                 </div>
               ))
@@ -201,10 +202,10 @@ export function GrowthCoachPage() {
               improve.map((m, idx) => (
                 <div key={idx} className="p-4 bg-cream rounded-xl border border-line space-y-1">
                   <span className="font-bold text-sm text-ink block">
-                    {m.productName || m.name || 'Product'}
+                    {m.title || m.productName || m.name || 'Product'}
                   </span>
                   <p className="text-xs text-ink-2">
-                    {m.advice || m.reason || (isMr ? '२५० ग्रॅम चाचणी पॅक सुरू करा.' : 'Introduce smaller 250g trial pack.')}
+                    {m.why ? `${m.why} ${m.action ? `Action: ${m.action}` : ''}` : m.advice || m.reason || (isMr ? '२५० ग्रॅम चाचणी पॅक सुरू करा.' : 'Introduce smaller 250g trial pack.')}
                   </p>
                 </div>
               ))

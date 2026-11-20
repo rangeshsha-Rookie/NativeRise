@@ -21,10 +21,11 @@ export function PartnerEarningsPage() {
   const fetchEarnings = async () => {
     try {
       const res = await apiClient.get('/partner/earnings');
-      if (res?.ok && res.data) {
-        setEarnings(res.data);
+      const data = res?.data || res;
+      if (data) {
+        setEarnings(data);
       }
-    } catch (err) {
+    } catch {
       // Handled
     } finally {
       setLoading(false);

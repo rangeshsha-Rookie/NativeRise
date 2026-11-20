@@ -37,8 +37,16 @@ apiClient.interceptors.request.use(
 // Response interceptor: unwrap { ok, data, meta } or throw ApiError
 apiClient.interceptors.response.use(
   (response) => {
-    // Return payload directly
-    return response.data;
+    const payload = response.data;
+    if (payload && typeof payload === 'object') {
+      if (payload.ok === undefined) {
+        payload.ok = true;
+      }
+      if (payload.data === undefined) {
+        payload.data = payload;
+      }
+    }
+    return payload;
   },
   (error) => {
     if (!error.response) {

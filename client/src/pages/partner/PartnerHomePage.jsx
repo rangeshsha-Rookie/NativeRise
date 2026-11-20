@@ -37,11 +37,13 @@ export function PartnerHomePage() {
         apiClient.get('/partner/profile')
       ]);
 
-      if (dashRes?.ok && dashRes.data) {
-        setDashboard(dashRes.data);
+      const d = dashRes?.data || dashRes;
+      const p = profRes?.data || profRes;
+      if (d) {
+        setDashboard(d);
       }
-      if (profRes?.ok && profRes.data) {
-        setProfile(profRes.data);
+      if (p) {
+        setProfile(p);
       }
     } catch (err) {
       // Handled

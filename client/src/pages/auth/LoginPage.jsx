@@ -60,10 +60,28 @@ export function LoginPage() {
     }
   };
 
-  const handleDemoFill = (demoEmail, demoRole) => {
+  const handleDemoFill = async (demoEmail, demoRole) => {
     setEmail(demoEmail);
     setPassword('Demo@1234');
     setError('');
+    setLoading(true);
+    try {
+      const res = await login(demoEmail, 'Demo@1234');
+      const role = res?.user?.role || demoRole;
+      if (nextParam && nextParam.startsWith('/')) {
+        navigate(nextParam, { replace: true });
+      } else if (role === 'seller') {
+        navigate('/seller', { replace: true });
+      } else if (role === 'partner') {
+        navigate('/partner', { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
+    } catch (err) {
+      setError(err?.message || t('errors.UNKNOWN', 'Login failed. Please check your network and credentials.'));
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

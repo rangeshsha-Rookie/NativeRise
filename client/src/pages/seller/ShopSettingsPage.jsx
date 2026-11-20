@@ -33,21 +33,21 @@ export function ShopSettingsPage() {
     apiClient
       .get('/seller/shop')
       .then((res) => {
-        if (res?.ok && res.data) {
-          const s = res.data.shop || res.data;
-          setShopNameMr(s.shopName?.mr || '');
-          setShopNameEn(s.shopName?.en || '');
-          setStoryMr(s.story?.mr || '');
-          setStoryEn(s.story?.en || '');
-          setVillage(s.location?.village || '');
-          setDistrict(s.location?.district || '');
+        const s = res?.data?.shop || res?.data || res?.shop || res;
+        if (s) {
+          setShopNameMr(s.shopNameAll?.mr || s.shopName?.mr || (typeof s.shopName === 'object' ? s.shopName?.mr : '') || '');
+          setShopNameEn(s.shopNameAll?.en || s.shopName?.en || (typeof s.shopName === 'object' ? s.shopName?.en : (typeof s.shopName === 'string' ? s.shopName : '')) || '');
+          setStoryMr(s.storyAll?.mr || s.story?.mr || (typeof s.story === 'object' ? s.story?.mr : '') || '');
+          setStoryEn(s.storyAll?.en || s.story?.en || (typeof s.story === 'object' ? s.story?.en : (typeof s.story === 'string' ? s.story : '')) || '');
+          setVillage(s.villageAll?.en || (typeof s.village === 'string' ? s.village : s.village?.en) || s.location?.village || '');
+          setDistrict(s.district || s.location?.district || '');
           setAddressLine(s.location?.line || '');
           if (s.location?.lat && s.location?.lng) {
             setCoords({ lat: s.location.lat, lng: s.location.lng });
           }
-          setDeliveryMode(s.deliveryMode || 'SELLER_PAYS');
+          setDeliveryMode(s.deliveryMode || 'INCLUDED');
           setMaxDeliveryKm(s.maxDeliveryKm || 30);
-          setMinOrderValueRs(Math.round((s.minOrderValuePaise || 0) / 100));
+          setMinOrderValueRs(Math.round((s.minOrderPaise || s.minOrderValuePaise || 0) / 100));
           setPrepTimeMins(s.prepTimeMins || 30);
           setIsAcceptingOrders(s.isAcceptingOrders !== false);
         }
