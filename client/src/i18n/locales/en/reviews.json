@@ -1,0 +1,10 @@
+{
+  "writeReviewTitle": "Rate & Review Product",
+  "ratingLabel": "Your overall rating",
+  "reviewTextLabel": "Your experience (optional)",
+  "reviewPlaceholder": "Tell other buyers about the taste, quality, freshness, or packaging...",
+  "submitReviewBtn": "Submit review",
+  "submitting": "Submitting...",
+  "reviewSuccess": "Thank you! Your verified review has been published.",
+  "verifiedPurchaseBadge": "Verified purchase"
+}

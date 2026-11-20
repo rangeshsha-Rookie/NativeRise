@@ -1,0 +1,23 @@
+{
+  "title": "Explore Authentic Village Products",
+  "allCategories": "All Categories",
+  "priceRange": "Price (Rs)",
+  "minPrice": "Min",
+  "maxPrice": "Max",
+  "applyPrice": "Apply",
+  "ratingFilter": "Customer Rating",
+  "anyRating": "Any rating",
+  "threePlus": "3 stars and above",
+  "fourPlus": "4 stars and above",
+  "inStockOnly": "In stock only",
+  "showingResults": "Showing {{count}} products",
+  "noProducts": "No products found matching your criteria.",
+  "clearFilters": "Clear all filters",
+  "tryCategories": "Try browsing one of these categories:",
+  "sortRelevance": "Relevance",
+  "sortPopular": "Most Popular",
+  "sortPriceAsc": "Price: Low to High",
+  "sortPriceDesc": "Price: High to Low",
+  "sortRating": "Highest Rated",
+  "sortNewest": "Newest First"
+}

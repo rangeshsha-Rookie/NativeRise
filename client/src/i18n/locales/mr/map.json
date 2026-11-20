@@ -1,0 +1,13 @@
+{
+  "locationPickerTitle": "आपले स्थान निश्चित करा",
+  "searchAddressPlaceholder": "शहर, गाव किंवा रस्ता शोधा...",
+  "useCurrentLocationBtn": "माझे सध्याचे थेट स्थान वापरा",
+  "addressLabel": "संपूर्ण पत्ता",
+  "landmarkLabel": "जवळची खूण (उदा. मंदिराशेजारी, शाळेमागे)",
+  "labelHome": "घर",
+  "labelWork": "कार्यालय",
+  "labelOther": "इतर",
+  "saveLocationBtn": "हे स्थान साठवा",
+  "useLocationBtn": "हे स्थान वापरा",
+  "mapHint": "नकाशावर क्लिक करा किंवा अचूक स्थानासाठी पिन हलवा"
+}

@@ -1,0 +1,18 @@
+{
+  "title": "माझे खाते",
+  "editProfileHeading": "प्रोफाइल तपशील",
+  "nameLabel": "नाव",
+  "phoneLabel": "फोन नंबर",
+  "saveProfile": "माहिती साठवा",
+  "changePasswordHeading": "पासवर्ड बदला",
+  "currentPasswordLabel": "सध्याचा पासवर्ड",
+  "newPasswordLabel": "नवीन पासवर्ड",
+  "confirmNewPasswordLabel": "नवीन पासवर्ड पुन्हा टाका",
+  "updatePasswordBtn": "पासवर्ड अपडेट करा",
+  "addressesHeading": "साठवलेले डिलिव्हरी पत्ते",
+  "addAddressBtn": "नवीन पत्ता जोडा",
+  "defaultBadge": "मुख्य पत्ता",
+  "setAsDefaultBtn": "मुख्य पत्ता करा",
+  "deleteAddressConfirm": "हा पत्ता हटवायचा का?",
+  "logoutBtn": "बाहेर पडा"
+}

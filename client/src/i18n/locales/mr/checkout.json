@@ -1,0 +1,17 @@
+{
+  "title": "चेकआऊट",
+  "deliveryAddressSection": "१. डिलिव्हरीचा पत्ता",
+  "deliveryDetailsSection": "२. डिलिव्हरी तपशील",
+  "paymentMethodSection": "३. पेमेंट पद्धत",
+  "orderSummarySection": "४. ऑर्डर सारांश",
+  "payOnline": "ऑनलाइन पेमेंट (UPI / कार्ड / नेटबँकिंग)",
+  "payOnlineHint": "रेझरपे टेस्ट मोडमध्ये तत्काळ पडताळणी",
+  "cod": "कॅश ऑन डिलिव्हरी (COD)",
+  "codHint": "वस्तू पोहोचल्यावर डिलिव्हरी पार्टनरला रोख पैसे द्या",
+  "placeOrderBtn": "ऑर्डर निश्चित करा",
+  "placingOrder": "ऑर्डर निश्चित करत आहे...",
+  "payNow": "आत्ता पैसे द्या",
+  "estimatedDelivery": "अंदाजे डिलिव्हरी वेळ",
+  "reviewCartBtn": "कार्ट तपासा",
+  "orderIssueTitle": "ऑर्डरच्या अटी बदलल्या आहेत"
+}

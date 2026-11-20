@@ -1,0 +1,20 @@
+{
+  "title": "विक्रेता कमाई",
+  "simulatedBanner": "सिम्युलेटेड सेटलमेंट - कोणतेही प्रत्यक्ष पैसे हस्तांतरित केले जात नाहीत",
+  "range7d": "मागील ७ दिवस",
+  "range30d": "मागील ३० दिवस",
+  "rangeAll": "संपूर्ण कालावधी",
+  "netEarningsStat": "एकूण निव्वळ कमाई",
+  "itemsTotalStat": "एकूण विकलेल्या वस्तू",
+  "platformFeeStat": "प्लॅटफॉर्म शुल्क (५%)",
+  "deliveryCostStat": "भरलेला डिलिव्हरी खर्च",
+  "deliveredOrdersStat": "पोहोचवलेल्या ऑर्डर्स",
+  "dailyChartTitle": "दैनंदिन निव्वळ कमाई",
+  "tableOrderNo": "ऑर्डर क्र.",
+  "tableDeliveredDate": "पोहोचवल्याची तारीख",
+  "tableItemsTotal": "वस्तूंचे मूल्य",
+  "tablePlatformFee": "प्लॅटफॉर्म शुल्क",
+  "tableDeliveryCost": "डिलिव्हरी खर्च",
+  "tableNetEarnings": "निव्वळ रक्कम",
+  "emptyEarnings": "या कालावधीत कोणतीही पोहोचवलेली ऑर्डर नाही."
+}

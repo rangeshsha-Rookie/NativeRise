@@ -1,0 +1,17 @@
+{
+  "title": "Checkout",
+  "deliveryAddressSection": "1. Delivery Address",
+  "deliveryDetailsSection": "2. Delivery Details",
+  "paymentMethodSection": "3. Payment Method",
+  "orderSummarySection": "4. Order Summary",
+  "payOnline": "Pay online (UPI / Card / Netbanking)",
+  "payOnlineHint": "Instant verification in Razorpay test mode",
+  "cod": "Cash on Delivery",
+  "codHint": "Pay cash to the delivery partner upon arrival",
+  "placeOrderBtn": "Place order",
+  "placingOrder": "Placing your order...",
+  "payNow": "Pay now",
+  "estimatedDelivery": "Estimated delivery time",
+  "reviewCartBtn": "Review cart",
+  "orderIssueTitle": "Order requirements changed"
+}

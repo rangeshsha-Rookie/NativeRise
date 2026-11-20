@@ -1,0 +1,20 @@
+{
+  "title": "Seller Earnings",
+  "simulatedBanner": "Simulated settlement - no real money is transferred",
+  "range7d": "Last 7 Days",
+  "range30d": "Last 30 Days",
+  "rangeAll": "All Time",
+  "netEarningsStat": "Total Net Earnings",
+  "itemsTotalStat": "Total Items Sold",
+  "platformFeeStat": "Platform Fee (5%)",
+  "deliveryCostStat": "Delivery Costs Borne",
+  "deliveredOrdersStat": "Delivered Orders",
+  "dailyChartTitle": "Daily Net Earnings (IST)",
+  "tableOrderNo": "Order #",
+  "tableDeliveredDate": "Delivered on",
+  "tableItemsTotal": "Items Total",
+  "tablePlatformFee": "Platform Fee",
+  "tableDeliveryCost": "Delivery Cost",
+  "tableNetEarnings": "Net Payout",
+  "emptyEarnings": "No delivered orders in this timeframe."
+}

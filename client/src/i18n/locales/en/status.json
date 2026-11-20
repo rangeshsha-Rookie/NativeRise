@@ -1,0 +1,20 @@
+{
+  "AWAITING_PAYMENT": "Waiting for payment",
+  "PLACED": "Order placed",
+  "ACCEPTED": "Seller accepted",
+  "PACKED": "Packed, waiting for a delivery partner",
+  "ASSIGNED": "Delivery partner assigned",
+  "PICKED_UP": "Out for delivery",
+  "DELIVERED": "Delivered",
+  "REJECTED": "Rejected by seller",
+  "CANCELLED": "Cancelled",
+  "DELIVERY_FAILED": "Delivery failed",
+  "PENDING": "Payment pending",
+  "PAID": "Paid online",
+  "COD_PENDING": "Cash on delivery pending",
+  "COD_COLLECTED": "Cash collected",
+  "REFUNDED": "Refunded",
+  "FAILED": "Payment failed",
+  "INCLUDED": "Free delivery (Included)",
+  "CUSTOMER_PAYS": "Customer pays delivery"
+}

@@ -1,0 +1,20 @@
+{
+  "title": "Growth Coach",
+  "subtitle": "Personalised weekly advice derived strictly from your orders and customer reviews",
+  "refreshBtn": "Refresh insights",
+  "refreshing": "Updating coach insights...",
+  "generatedWithAi": "Generated with AI",
+  "generatedFromTemplates": "Generated from verified templates",
+  "platformBenchmarkNotice": "Based on similar products on NativeRise",
+  "summaryHeading": "Weekly Summary",
+  "makeMoreHeading": "Make More of These",
+  "improveHeading": "Areas to Improve",
+  "proTipHeading": "Weekly Artisan Tip",
+  "salesTrendChartTitle": "Sales Trend (Last 8 Weeks)",
+  "reviewThemesChartTitle": "Review Sentiment by Topic",
+  "positiveLabel": "Positive",
+  "negativeLabel": "Areas for care",
+  "updateStockBtn": "Update stock",
+  "editProductBtn": "Open product",
+  "viewThemeReviewsBtn": "See customer feedback"
+}

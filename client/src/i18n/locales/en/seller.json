@@ -1,0 +1,21 @@
+{
+  "dashboardTitle": "Seller Dashboard",
+  "greeting": "Welcome back, {{name}}",
+  "acceptingOrdersSwitch": "Accepting Orders",
+  "acceptingOrdersConfirmOff": "Are you sure you want to stop accepting orders? Customers will not be able to order from your shop.",
+  "newOrdersStat": "New Orders",
+  "activeOrdersStat": "In Progress",
+  "deliveredTodayStat": "Delivered Today",
+  "deliveredThisWeekStat": "Delivered This Week",
+  "netEarningsThisWeekStat": "Net Earnings (This Week)",
+  "netEarningsTotalStat": "Total Net Earnings",
+  "ratingStat": "Shop Rating",
+  "pendingActionsHeading": "Pending Actions",
+  "lowStockHeading": "Low Stock Alert",
+  "updateStockInline": "Save",
+  "quickActionsHeading": "Quick Actions",
+  "addProductBtn": "Add new product",
+  "whatToSellBtn": "What to sell",
+  "growthCoachBtn": "Growth Coach",
+  "openAssistantBtn": "Ask business assistant"
+}

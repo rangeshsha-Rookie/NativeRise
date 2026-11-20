@@ -1,0 +1,13 @@
+{
+  "heading": "Live Order Tracking",
+  "etaLabel": "Estimated arrival in",
+  "distanceRemaining": "{{km}} km away",
+  "partnerHeadingToShop": "Delivery partner is heading to the village shop for pickup.",
+  "partnerOutForDelivery": "Delivery partner picked up your package and is on the way to you.",
+  "partnerNearing": "Delivery partner is nearing your location (within 1 km).",
+  "partnerArrived": "Delivery partner has arrived at your doorstep!",
+  "lastUpdatedAgo": "Location updated {{seconds}} sec ago",
+  "staleLocationWarning": "Live GPS paused. Last received {{mins}} minutes ago.",
+  "plannedRoute": "Planned route",
+  "actualTrail": "Travelled path"
+}

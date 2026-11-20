@@ -1,0 +1,20 @@
+{
+  "title": "ग्रोथ कोच (व्यवसाय सल्लागार)",
+  "subtitle": "आपल्या ऑर्डर्स आणि ग्राहकांच्या रिव्ह्यूवरून तयार केलेला वैयक्तिक सल्ला",
+  "refreshBtn": "माहिती ताजी करा",
+  "refreshing": "माहिती तपासत आहे...",
+  "generatedWithAi": "एआय द्वारे तयार केले",
+  "generatedFromTemplates": "पडताळलेल्या साच्यांमधून तयार केले",
+  "platformBenchmarkNotice": "नेटिव्हराईज वरील तत्सम उत्पादनांवर आधारित",
+  "summaryHeading": "आठवड्याचा सारांश",
+  "makeMoreHeading": "या वस्तूंचे उत्पादन वाढवा",
+  "improveHeading": "सुधारणा करण्याची गरज असलेले भाग",
+  "proTipHeading": "या आठवड्याची मोलाची टीप",
+  "salesTrendChartTitle": "विक्रीचा कल (मागील ८ आठवडे)",
+  "reviewThemesChartTitle": "विषयानुसार ग्राहकांची मते",
+  "positiveLabel": "सकारात्मक",
+  "negativeLabel": "काळजी घेण्याचे मुद्दे",
+  "updateStockBtn": "साठा अपडेट करा",
+  "editProductBtn": "उत्पादन उघडा",
+  "viewThemeReviewsBtn": "ग्राहकांचे अभिप्राय पाहा"
+}

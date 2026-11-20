@@ -1,0 +1,16 @@
+{
+  "skipToContent": "थेट मुख्य मजकुरावर जा",
+  "openMenu": "मेनू उघडा",
+  "closeMenu": "मेनू बंद करा",
+  "selectLanguage": "भाषा निवडा",
+  "productImage": "{{name}} चा फोटो",
+  "shopCover": "दुकानाचा कव्हर फोटो",
+  "ratingStars": "५ पैकी {{rating}} तारे",
+  "deliveryPartnerMarker": "डिलिव्हरी पार्टनरचे थेट स्थान दर्शक",
+  "pickupMarker": "पिकअप ठिकाण दर्शक",
+  "dropMarker": "डिलिव्हरी ठिकाण दर्शक",
+  "decrementQty": "प्रमाण कमी करा",
+  "incrementQty": "प्रमाण वाढवा",
+  "zoomIn": "नकाशा मोठा करा",
+  "zoomOut": "नकाशा लहान करा"
+}

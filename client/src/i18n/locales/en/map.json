@@ -1,0 +1,13 @@
+{
+  "locationPickerTitle": "Choose Your Location",
+  "searchAddressPlaceholder": "Search town, village, or street...",
+  "useCurrentLocationBtn": "Use my current GPS location",
+  "addressLabel": "Full Address",
+  "landmarkLabel": "Landmark (e.g. Near temple, behind school)",
+  "labelHome": "Home",
+  "labelWork": "Work",
+  "labelOther": "Other",
+  "saveLocationBtn": "Save this location",
+  "useLocationBtn": "Use this location",
+  "mapHint": "Click the map or drag the pin to adjust your exact location"
+}

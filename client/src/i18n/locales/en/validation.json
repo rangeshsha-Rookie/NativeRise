@@ -1,0 +1,13 @@
+{
+  "required": "This field is required",
+  "invalidEmail": "Please enter a valid email address",
+  "invalidPhone": "Please enter a valid 10-digit Indian phone number starting with 6-9",
+  "passwordMinLength": "Password must be at least 8 characters long with 1 letter and 1 number",
+  "passwordMismatch": "Passwords do not match",
+  "minValue": "Must be at least {{min}}",
+  "maxValue": "Must be at most {{max}}",
+  "textLengthRange": "Must be between {{min}} and {{max}} characters",
+  "invalidPin": "Pincode must be 6 digits",
+  "invalidNumber": "Please enter a valid number",
+  "selectOption": "Please select an option"
+}

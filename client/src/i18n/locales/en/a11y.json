@@ -1,0 +1,16 @@
+{
+  "skipToContent": "Skip to main content",
+  "openMenu": "Open navigation menu",
+  "closeMenu": "Close navigation menu",
+  "selectLanguage": "Select language",
+  "productImage": "Photo of {{name}}",
+  "shopCover": "Shop cover banner",
+  "ratingStars": "{{rating}} out of 5 stars",
+  "deliveryPartnerMarker": "Delivery partner live location marker",
+  "pickupMarker": "Pickup point marker",
+  "dropMarker": "Delivery destination marker",
+  "decrementQty": "Decrease quantity",
+  "incrementQty": "Increase quantity",
+  "zoomIn": "Zoom in on map",
+  "zoomOut": "Zoom out on map"
+}

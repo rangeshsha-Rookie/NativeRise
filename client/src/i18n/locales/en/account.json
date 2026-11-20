@@ -1,0 +1,18 @@
+{
+  "title": "My Account",
+  "editProfileHeading": "Profile Details",
+  "nameLabel": "Name",
+  "phoneLabel": "Phone Number",
+  "saveProfile": "Save details",
+  "changePasswordHeading": "Change Password",
+  "currentPasswordLabel": "Current password",
+  "newPasswordLabel": "New password",
+  "confirmNewPasswordLabel": "Confirm new password",
+  "updatePasswordBtn": "Update password",
+  "addressesHeading": "Saved Delivery Addresses",
+  "addAddressBtn": "Add new address",
+  "defaultBadge": "Default",
+  "setAsDefaultBtn": "Set as default",
+  "deleteAddressConfirm": "Delete this saved address?",
+  "logoutBtn": "Log out"
+}

@@ -1,0 +1,11 @@
+node_modules
+.env
+.env.local
+atlas-credentials.env
+API KEYS.txt
+dist
+coverage
+.cache
+qa-screenshots
+.DS_Store
+*.log

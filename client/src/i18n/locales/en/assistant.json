@@ -1,0 +1,19 @@
+{
+  "title": "NativeRise AI Assistant",
+  "subtitle": "Ask about village products, order status, or help",
+  "clearChat": "New chat",
+  "inputPlaceholder": "Ask a question...",
+  "customerChip1": "Show products under Rs 300",
+  "customerChip2": "Show pickles near me",
+  "customerChip3": "Where is my order?",
+  "customerChip4": "Can you deliver to my location?",
+  "customerChip5": "What is the cancellation policy?",
+  "sellerChip1": "How many orders did I get this week?",
+  "sellerChip2": "Write a description for my mango pickle",
+  "sellerChip3": "What do my customers complain about most?",
+  "sellerChip4": "Which products are low on stock?",
+  "sellerChip5": "Show my earnings this week",
+  "sendBtn": "Send",
+  "draftTicketAction": "Draft a support ticket",
+  "sendTicketAction": "Send to seller"
+}

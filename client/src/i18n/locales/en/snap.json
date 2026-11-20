@@ -1,0 +1,19 @@
+{
+  "heading": "Snap & Sell + Voice Listing",
+  "snapActionTitle": "Snap a Photo",
+  "snapActionDesc": "Take or upload a photo of your product. AI will identify it and prefill your listing.",
+  "voiceActionTitle": "Speak the Details",
+  "voiceActionDesc": "Speak naturally about price, weight, and stock in Marathi, Hindi, or English.",
+  "takePhotoBtn": "Take / Upload Photo",
+  "analyzingPhoto": "AI is analyzing your product photo...",
+  "notRecognizedMessage": "We could not recognise this item. Please fill in the details manually.",
+  "micButton": "Start speaking",
+  "micListening": "Listening... speak now",
+  "micStop": "Stop recording",
+  "fillFormBtn": "Fill form from speech",
+  "voiceLanguageLabel": "Speaking language",
+  "langMarathi": "Marathi (मराठी)",
+  "langHindi": "Hindi (हिंदी)",
+  "langEnglish": "English",
+  "unsupportedBrowser": "Voice input works best in Google Chrome or Microsoft Edge."
+}

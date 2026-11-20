@@ -1,0 +1,23 @@
+{
+  "title": "गावातील अस्सल उत्पादने शोधा",
+  "allCategories": "सर्व वर्गवाऱ्या",
+  "priceRange": "किंमत (रुपये)",
+  "minPrice": "किमान",
+  "maxPrice": "कमाल",
+  "applyPrice": "लागू करा",
+  "ratingFilter": "ग्राहक रेटिंग",
+  "anyRating": "कोणतेही रेटिंग",
+  "threePlus": "३ तारे आणि अधिक",
+  "fourPlus": "४ तारे आणि अधिक",
+  "inStockOnly": "फक्त शिल्लक साठा असलेले",
+  "showingResults": "{{count}} उत्पादने दाखवत आहोत",
+  "noProducts": "आपल्या निकषांनुसार कोणतीही उत्पादने सापडली नाहीत.",
+  "clearFilters": "सर्व फिल्टर साफ करा",
+  "tryCategories": "यापैकी एका वर्गवारीत शोधून पाहा:",
+  "sortRelevance": "सुसंगतता",
+  "sortPopular": "सर्वाधिक लोकप्रिय",
+  "sortPriceAsc": "किंमत: कमी ते जास्त",
+  "sortPriceDesc": "किंमत: जास्त ते कमी",
+  "sortRating": "उत्कृष्ट रेटिंग",
+  "sortNewest": "नवीनतम"
+}

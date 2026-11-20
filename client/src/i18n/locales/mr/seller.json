@@ -1,0 +1,21 @@
+{
+  "dashboardTitle": "विक्रेता डॅशबोर्ड",
+  "greeting": "पुन्हा स्वागत, {{name}}",
+  "acceptingOrdersSwitch": "ऑर्डर्स स्वीकारणे चालू आहे",
+  "acceptingOrdersConfirmOff": "आपण ऑर्डर्स स्वीकारणे थांबवू इच्छिता का? ग्राहक आपल्या दुकानातून खरेदी करू शकणार नाहीत.",
+  "newOrdersStat": "नवीन ऑर्डर्स",
+  "activeOrdersStat": "प्रक्रियेत",
+  "deliveredTodayStat": "आज पोहोचवलेल्या",
+  "deliveredThisWeekStat": "या आठवड्यात पोहोचवलेल्या",
+  "netEarningsThisWeekStat": "निव्वळ कमाई (हा आठवडा)",
+  "netEarningsTotalStat": "एकूण निव्वळ कमाई",
+  "ratingStat": "दुकान रेटिंग",
+  "pendingActionsHeading": "तात्काळ करावयाची कामे",
+  "lowStockHeading": "साठा संपत आलेल्या वस्तू",
+  "updateStockInline": "साठवा",
+  "quickActionsHeading": "जलद पर्याय",
+  "addProductBtn": "नवीन उत्पादन जोडा",
+  "whatToSellBtn": "काय विकावे",
+  "growthCoachBtn": "ग्रोथ कोच",
+  "openAssistantBtn": "व्यवसाय सहाय्यकाला विचारा"
+}
