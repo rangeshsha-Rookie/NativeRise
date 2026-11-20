@@ -1,0 +1,21 @@
+name: Render Free Instance Keep-Alive
+
+on:
+  schedule:
+    # Runs every 10 minutes to prevent Render free tier from sleeping (inactivity limit is 15 mins)
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  keep-alive:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Backend Health Endpoint
+        run: |
+          TARGET_URL="${{ secrets.RENDER_BACKEND_URL }}"
+          if [ -z "$TARGET_URL" ]; then
+            TARGET_URL="https://nativerise-backend.onrender.com/health"
+          fi
+          echo "Pinging: $TARGET_URL"
+          STATUS=$(curl -s -o /dev/null -w "%{http_code}" -m 40 "$TARGET_URL" || echo "FAILED")
+          echo "Ping result HTTP Status: $STATUS"
