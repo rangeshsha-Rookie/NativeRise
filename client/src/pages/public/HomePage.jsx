@@ -15,17 +15,17 @@ import {
 import apiClient from '../../api/client';
 import ProductCard from '../../components/ui/ProductCard';
 import LocationPicker from '../../components/map/LocationPicker';
-import { CATEGORY_IMAGES, ARTISAN_PORTRAITS } from '../../utils/productImages';
+import { CATEGORY_IMAGES, ARTISAN_PORTRAITS, assetUrl } from '../../utils/productImages';
 
 const CATEGORIES = [
-  { slug: 'grains_flours', en: 'Farming', mr: 'शेती उत्पादने', image: '/mockup-assets/cat-farming.png' },
-  { slug: 'handicrafts', en: 'Handicrafts', mr: 'हस्तकला', image: '/mockup-assets/cat-handicrafts.png' },
-  { slug: 'handicrafts', en: 'Textiles & Fabrics', mr: 'वस्त्रे व हातमाग', image: '/mockup-assets/cat-textiles.png' },
-  { slug: 'honey_preserves', en: 'Food & Honey', mr: 'अन्न व मध', image: '/mockup-assets/cat-food-honey.png' },
-  { slug: 'handicrafts', en: 'Home Decor', mr: 'घर सजावट', image: '/mockup-assets/cat-home-decor.png' },
-  { slug: 'handicrafts', en: 'Traditional Jewellery', mr: 'पारंपरिक दागिने', image: '/mockup-assets/cat-jewellery.png' },
-  { slug: 'personal_care', en: 'Eco-Friendly', mr: 'पर्यावरणपूरक', image: '/mockup-assets/cat-eco-friendly.png' },
-  { slug: 'pickles', en: 'Organic Produce', mr: 'सेंद्रिय शेतमाल', image: '/mockup-assets/cat-organic-produce.png' }
+  { slug: 'grains_flours', en: 'Farming', mr: 'शेती उत्पादने', image: assetUrl('mockup-assets/cat-farming.png') },
+  { slug: 'handicrafts', en: 'Handicrafts', mr: 'हस्तकला', image: assetUrl('mockup-assets/cat-handicrafts.png') },
+  { slug: 'handicrafts', en: 'Textiles & Fabrics', mr: 'वस्त्रे व हातमाग', image: assetUrl('mockup-assets/cat-textiles.png') },
+  { slug: 'honey_preserves', en: 'Food & Honey', mr: 'अन्न व मध', image: assetUrl('mockup-assets/cat-food-honey.png') },
+  { slug: 'handicrafts', en: 'Home Decor', mr: 'घर सजावट', image: assetUrl('mockup-assets/cat-home-decor.png') },
+  { slug: 'handicrafts', en: 'Traditional Jewellery', mr: 'पारंपरिक दागिने', image: assetUrl('mockup-assets/cat-jewellery.png') },
+  { slug: 'personal_care', en: 'Eco-Friendly', mr: 'पर्यावरणपूरक', image: assetUrl('mockup-assets/cat-eco-friendly.png') },
+  { slug: 'pickles', en: 'Organic Produce', mr: 'सेंद्रिय शेतमाल', image: assetUrl('mockup-assets/cat-organic-produce.png') }
 ];
 
 export function HomePage() {
@@ -164,7 +164,7 @@ export function HomePage() {
             <div className="lg:col-span-5 relative">
               <div className="relative rounded-3xl overflow-hidden border-4 border-white shadow-xl bg-[#F4EDE4]">
                 <img
-                  src="/mockup-assets/hero-village-scenery.png"
+                  src={assetUrl('mockup-assets/hero-village-scenery.png')}
                   alt="Rural Village Heritage"
                   className="w-full h-auto object-cover max-h-[380px]"
                 />
@@ -348,7 +348,7 @@ export function HomePage() {
           <div className="p-5 sm:p-6 bg-white border border-[#EDE7DD] rounded-2xl flex items-start gap-4 shadow-xs hover:shadow-md transition-shadow">
             <div className="w-12 h-12 rounded-2xl bg-[#EAF5EC] flex items-center justify-center p-2.5 shrink-0">
               <img
-                src="/mockup-assets/icon-authentic-products.png"
+                src={assetUrl('mockup-assets/icon-authentic-products.png')}
                 alt="Authentic"
                 className="w-full h-full object-contain"
               />
@@ -368,7 +368,7 @@ export function HomePage() {
           <div className="p-5 sm:p-6 bg-white border border-[#EDE7DD] rounded-2xl flex items-start gap-4 shadow-xs hover:shadow-md transition-shadow">
             <div className="w-12 h-12 rounded-2xl bg-[#E8F2FA] flex items-center justify-center p-2.5 shrink-0">
               <img
-                src="/mockup-assets/icon-rural-economy.png"
+                src={assetUrl('mockup-assets/icon-rural-economy.png')}
                 alt="Rural Economy"
                 className="w-full h-full object-contain"
               />
@@ -388,7 +388,7 @@ export function HomePage() {
           <div className="p-5 sm:p-6 bg-white border border-[#EDE7DD] rounded-2xl flex items-start gap-4 shadow-xs hover:shadow-md transition-shadow">
             <div className="w-12 h-12 rounded-2xl bg-[#FBF3E6] flex items-center justify-center p-2.5 shrink-0">
               <img
-                src="/mockup-assets/icon-secure-shopping.png"
+                src={assetUrl('mockup-assets/icon-secure-shopping.png')}
                 alt="Secure Shopping"
                 className="w-full h-full object-contain"
               />
@@ -436,7 +436,7 @@ export function HomePage() {
             </div>
             <div className="aspect-video bg-black relative flex items-center justify-center">
               <img
-                src="/mockup-assets/hero-village-scenery.png"
+                src={assetUrl('mockup-assets/hero-village-scenery.png')}
                 alt="Artisan Story"
                 className="w-full h-full object-cover opacity-80"
               />

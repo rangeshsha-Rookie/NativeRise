@@ -12,6 +12,7 @@ import {
   Linkedin,
   Twitter
 } from 'lucide-react';
+import { assetUrl } from '../../utils/productImages';
 
 export function Footer() {
   const { t, i18n } = useTranslation();
@@ -183,7 +184,7 @@ export function Footer() {
         {/* Silhouette banner along the bottom */}
         <div className="w-full opacity-30 my-4 select-none pointer-events-none flex justify-center overflow-hidden">
           <img
-            src="/mockup-assets/footer-village-silhouette.png"
+            src={assetUrl('mockup-assets/footer-village-silhouette.png')}
             alt="Village Silhouette"
             className="w-full max-h-11 object-cover mix-blend-screen"
           />

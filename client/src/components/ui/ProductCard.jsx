@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ShoppingBag, Star, Check, Heart, MapPin } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
-import { getProductPhoto } from '../../utils/productImages';
+import { getProductPhoto, assetUrl } from '../../utils/productImages';
 import clsx from 'clsx';
 
 export function ProductCard({ product, className = '' }) {
@@ -71,7 +71,7 @@ export function ProductCard({ product, className = '' }) {
           alt={name}
           className="w-full h-full object-contain mix-blend-multiply group-hover:scale-108 transition-transform duration-300"
           onError={(e) => {
-            e.currentTarget.src = '/mockup-assets/prod-village-honey.png';
+            e.currentTarget.src = assetUrl('mockup-assets/prod-village-honey.png');
           }}
         />
 
