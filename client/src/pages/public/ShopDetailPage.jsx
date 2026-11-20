@@ -28,8 +28,9 @@ export function ShopDetailPage() {
         if (mounted && shopRes?.ok && shopRes.data) {
           setSeller(shopRes.data.seller || shopRes.data);
         }
-        if (mounted && prodRes?.ok && prodRes.data) {
-          setProducts(prodRes.data.products || prodRes.data || []);
+        if (mounted && prodRes) {
+          const list = prodRes.items || prodRes.products || prodRes.data?.items || prodRes.data?.products || (Array.isArray(prodRes.data) ? prodRes.data : (Array.isArray(prodRes) ? prodRes : []));
+          setProducts(Array.isArray(list) ? list : []);
         }
       } catch (err) {
         // Handled

@@ -50,14 +50,15 @@ export function SellerDashboardPage() {
         apiClient.get('/seller/orders?limit=10')
       ]);
 
-      if (dashRes?.ok && dashRes.data) {
-        setDashboard(dashRes.data);
+      if (dashRes) {
+        setDashboard(dashRes.data || dashRes);
       }
-      if (shopRes?.ok && shopRes.data) {
-        setShop(shopRes.data.shop || shopRes.data);
+      if (shopRes) {
+        setShop(shopRes.data?.shop || shopRes.data || shopRes.shop || shopRes);
       }
-      if (ordRes?.ok && ordRes.data) {
-        setOrders(ordRes.data.orders || ordRes.data || []);
+      if (ordRes) {
+        const ordList = ordRes.items || ordRes.orders || ordRes.data?.items || ordRes.data?.orders || (Array.isArray(ordRes.data) ? ordRes.data : (Array.isArray(ordRes) ? ordRes : []));
+        setOrders(Array.isArray(ordList) ? ordList : []);
       }
     } catch (err) {
       // Handled
@@ -156,9 +157,10 @@ export function SellerDashboardPage() {
     'My Village Shop';
   const village = shop?.location?.village || '';
 
-  const newOrders = orders.filter((o) => o.status === 'PLACED');
-  const preparingOrders = orders.filter((o) => o.status === 'ACCEPTED');
-  const readyOrders = orders.filter((o) => ['PACKED', 'ASSIGNED', 'PICKED_UP'].includes(o.status));
+  const ordersList = Array.isArray(orders) ? orders : (orders?.items || orders?.orders || []);
+  const newOrders = ordersList.filter((o) => o.status === 'PLACED');
+  const preparingOrders = ordersList.filter((o) => o.status === 'ACCEPTED');
+  const readyOrders = ordersList.filter((o) => ['PACKED', 'ASSIGNED', 'PICKED_UP'].includes(o.status));
 
   return (
     <div className="max-w-[1200px] mx-auto px-4 sm:px-8 py-8 sm:py-12 space-y-8">

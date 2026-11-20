@@ -37,9 +37,8 @@ export function SellerOrdersPage() {
     setLoading(true);
     try {
       const res = await apiClient.get('/seller/orders');
-      if (res?.ok && res.data) {
-        setOrders(res.data.orders || res.data || []);
-      }
+      const list = res?.items || res?.orders || res?.data?.items || res?.data?.orders || (Array.isArray(res?.data) ? res.data : (Array.isArray(res) ? res : []));
+      setOrders(Array.isArray(list) ? list : []);
     } catch (err) {
       // Handled
     } finally {
@@ -93,7 +92,8 @@ export function SellerOrdersPage() {
     }
   };
 
-  const filteredOrders = orders.filter((o) => {
+  const ordersList = Array.isArray(orders) ? orders : (orders?.items || orders?.orders || []);
+  const filteredOrders = ordersList.filter((o) => {
     if (activeTab === 'ALL') return true;
     if (activeTab === 'CANCELLED') {
       return ['CANCELLED', 'REJECTED', 'DELIVERY_FAILED'].includes(o.status);

@@ -19,9 +19,8 @@ export function SellerProductsPage() {
   const fetchProducts = async () => {
     try {
       const res = await apiClient.get('/seller/products');
-      if (res?.ok && res.data) {
-        setProducts(res.data.products || res.data || []);
-      }
+      const list = res?.items || res?.products || res?.data?.items || res?.data?.products || (Array.isArray(res?.data) ? res.data : (Array.isArray(res) ? res : []));
+      setProducts(Array.isArray(list) ? list : []);
     } catch (err) {
       // Handled
     } finally {
