@@ -7,7 +7,10 @@ export async function connectDB() {
     return mongoose.connection;
   }
   try {
-    const conn = await mongoose.connect(config.MONGODB_URI);
+    const conn = await mongoose.connect(config.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 8000
+    });
     console.log(`[Database] MongoDB connected: ${conn.connection.host}`);
     return conn;
   } catch (err) {
