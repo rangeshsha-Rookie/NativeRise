@@ -5,19 +5,30 @@ import { CODES } from '../utils/codes.js';
 
 export async function chat(req, res, next) {
   try {
-    const { messages } = req.body;
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
-      throw new HttpError(400, CODES.VALIDATION_FAILED, null, 'messages array is required');
+    const { messages, message, history } = req.body || {};
+    let normalizedMessages = messages;
+    if (!normalizedMessages && message) {
+      normalizedMessages = [
+        ...(Array.isArray(history) ? history : []),
+        { role: 'user', content: message }
+      ];
+    }
+    if (!normalizedMessages || !Array.isArray(normalizedMessages) || normalizedMessages.length === 0) {
+      throw new HttpError(400, CODES.VALIDATION_FAILED, null, 'messages array or message is required');
     }
 
-    const lang = req.lang || req.user.preferredLang || 'en';
+    const lang = req.lang || req.user?.preferredLang || 'en';
     const result = await chatAssistant({
-      user: req.user,
-      messages,
+      user: req.user || { role: 'customer', name: { en: 'Guest Customer', mr: 'ग्राहक' } },
+      messages: normalizedMessages,
       lang
     });
 
-    res.json(result);
+    res.json({
+      ok: true,
+      data: result,
+      ...result
+    });
   } catch (err) {
     next(err);
   }

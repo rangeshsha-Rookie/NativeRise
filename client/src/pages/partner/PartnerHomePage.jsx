@@ -302,19 +302,32 @@ export function PartnerHomePage() {
         <div className="p-5 bg-surface border border-line rounded-card space-y-1">
           <div className="flex items-center justify-between text-xs text-ink-2">
             <span>{isMr ? 'उपलब्ध ऑर्डर्स (जवळपास)' : 'Available Jobs Nearby'}</span>
-            <Briefcase className="w-4 h-4 text-primary-800" />
+            <Briefcase className="w-4 h-4 text-emerald-700" />
           </div>
-          <p className="text-2xl sm:text-3xl font-bold font-serif text-primary-800">
-            {availableJobsCount}
-          </p>
+          <div className="flex items-baseline gap-2">
+            <p className="text-2xl sm:text-3xl font-bold font-serif text-emerald-800">
+              {isOnline ? availableJobsCount : '0'}
+            </p>
+            {!isOnline && (
+              <span className="text-[11px] font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded-full">
+                {isMr ? 'ऑफलाईन' : 'Offline'}
+              </span>
+            )}
+          </div>
           <div className="pt-1">
-            <Link
-              to="/partner/jobs"
-              className="text-xs font-semibold text-clay hover:underline inline-flex items-center gap-1"
-            >
-              <span>{isMr ? 'ऑर्डर्स पहा' : 'View & Accept'}</span>
-              <ArrowRight className="w-3 h-3" />
-            </Link>
+            {isOnline ? (
+              <Link
+                to="/partner/jobs"
+                className="text-xs font-semibold text-clay hover:underline inline-flex items-center gap-1"
+              >
+                <span>{isMr ? 'ऑर्डर्स पहा आणि स्वीकारा' : 'View & Accept Jobs'}</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
+            ) : (
+              <span className="text-[11px] text-ink-2">
+                {isMr ? 'ऑर्डर्स मिळवण्यासाठी वरून ऑनलाईन व्हा' : 'Turn Online above to receive jobs'}
+              </span>
+            )}
           </div>
         </div>
       </div>
@@ -356,6 +369,39 @@ export function PartnerHomePage() {
           </div>
           <ArrowRight className="w-5 h-5 text-ink-2" />
         </Link>
+      </div>
+
+      {/* Partner Delivery Guide & Flow Card */}
+      <div className="p-6 bg-surface border border-line rounded-card space-y-4">
+        <h3 className="font-serif font-bold text-ink text-base">
+          {isMr ? 'डिलिव्हरी प्रक्रिया कशी कार्य करते?' : 'How Rural Village Delivery Works'}
+        </h3>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 text-xs">
+          <div className="p-3.5 bg-cream-2 rounded-xl border border-line space-y-1">
+            <span className="font-bold text-clay block">1. {isMr ? 'ऑनलाईन व्हा' : 'Go Online'}</span>
+            <p className="text-ink-2">
+              {isMr ? 'GPS लोकेशन चालू करून ॲपमध्ये ऑनलाईन व्हा.' : 'Toggle switch to Online with GPS enabled.'}
+            </p>
+          </div>
+          <div className="p-3.5 bg-cream-2 rounded-xl border border-line space-y-1">
+            <span className="font-bold text-clay block">2. {isMr ? 'ऑर्डर स्वीकारा' : 'Accept Job'}</span>
+            <p className="text-ink-2">
+              {isMr ? 'गावात पॅक झालेली उपलब्ध ऑर्डर स्वीकारा.' : 'Accept a packed order in your 25 km radius.'}
+            </p>
+          </div>
+          <div className="p-3.5 bg-cream-2 rounded-xl border border-line space-y-1">
+            <span className="font-bold text-clay block">3. {isMr ? 'पिकअप आणि ट्रॅकिंग' : 'Pickup & Ride'}</span>
+            <p className="text-ink-2">
+              {isMr ? 'कारागिराकडून पार्सल घ्या आणि चेकपॉईंट्स अपडेट करा.' : 'Collect from artisan home and broadcast live checkpoints.'}
+            </p>
+          </div>
+          <div className="p-3.5 bg-cream-2 rounded-xl border border-line space-y-1">
+            <span className="font-bold text-emerald-700 block">4. {isMr ? 'डिलिव्हरी आणि कमाई' : 'Deliver & Earn'}</span>
+            <p className="text-ink-2">
+              {isMr ? 'OTP ने डिलिव्हरी पूर्ण करा आणि पेआउट मिळवा.' : 'Verify OTP at customer doorstep and get instant payout.'}
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   );

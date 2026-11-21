@@ -54,6 +54,11 @@ export function CustomerLayout() {
         <LocationPicker
           isOpen={showLocationPicker}
           onClose={() => setShowLocationPicker(false)}
+          onSelect={(loc) => {
+            localStorage.setItem('nr_guest_loc', JSON.stringify(loc));
+            setShowLocationPicker(false);
+            window.location.reload();
+          }}
         />
       )}
 
@@ -243,34 +248,68 @@ export function SellerLayout() {
 }
 
 export function PartnerLayout() {
-  const { t } = useTranslation();
-  const { logout } = useAuth();
+  const { t, i18n } = useTranslation();
+  const { logout, user } = useAuth();
+  const location = useLocation();
+  const isMr = i18n.language === 'mr';
+
+  const partnerNavLinks = [
+    { to: '/partner', label: isMr ? 'डॅशबोर्ड' : 'Dashboard' },
+    { to: '/partner/jobs', label: isMr ? 'उपलब्ध ऑर्डर्स' : 'Available Jobs' },
+    { to: '/partner/active', label: isMr ? 'चालू डिलिव्हरी' : 'Active Delivery' },
+    { to: '/partner/earnings', label: isMr ? 'कमाई आणि हिशोब' : 'Earnings & Ledger' },
+    { to: '/partner/profile', label: isMr ? 'वाहन प्रोफाईल' : 'Vehicle Profile' }
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-cream text-ink">
+    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-stone-900">
       {/* Partner Top Bar */}
-      <header className="sticky top-0 z-40 bg-surface/95 backdrop-blur-md border-b border-line h-16 flex items-center justify-between px-4 sm:px-8">
-        <div className="flex items-center gap-4">
+      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#EAE3D9] h-16 flex items-center justify-between px-4 sm:px-8 shadow-xs">
+        <div className="flex items-center gap-6">
           <Link to="/partner" className="flex items-center gap-2">
             <img src="/logo.svg" alt="NativeRise" className="h-8 w-auto" />
-            <span className="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-clay text-cream">
+            <span className="px-2.5 py-0.5 rounded-full text-xs font-bold bg-[#E09F3E] text-stone-950">
               Partner
             </span>
           </Link>
-          <LanguageToggle />
+
+          {/* Desktop Navigation Tabs */}
+          <nav className="hidden md:flex items-center gap-1">
+            {partnerNavLinks.map((link) => {
+              const isActive = location.pathname === link.to;
+              return (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={clsx(
+                    'px-3.5 py-1.5 rounded-full text-xs font-bold transition-all',
+                    isActive
+                      ? 'bg-[#15803d] text-white shadow-xs'
+                      : 'text-stone-700 hover:text-stone-950 hover:bg-[#FAF7F2]'
+                  )}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
+          </nav>
         </div>
 
-        <button
-          type="button"
-          onClick={logout}
-          aria-label={t('nav.logout')}
-          className="p-2 text-ink-2 hover:text-danger transition-colors rounded-full hover:bg-cream-2"
-        >
-          <LogOut className="w-5 h-5" />
-        </button>
+        <div className="flex items-center gap-3">
+          <LanguageToggle />
+          <button
+            type="button"
+            onClick={logout}
+            aria-label={t('nav.logout')}
+            title="Log out"
+            className="p-2 text-stone-500 hover:text-red-600 transition-colors rounded-full hover:bg-stone-100"
+          >
+            <LogOut className="w-5 h-5" />
+          </button>
+        </div>
       </header>
 
-      <main className="flex-1 p-4 sm:p-8 pb-24 md:pb-8 max-w-4xl w-full mx-auto">
+      <main className="flex-1 p-4 sm:p-8 pb-24 md:pb-8 max-w-5xl w-full mx-auto">
         <Outlet />
       </main>
 

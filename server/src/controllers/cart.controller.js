@@ -290,27 +290,36 @@ export async function getCartQuote(req, res, next) {
     let customerDeliveryCharge = 0;
     let etaMins = 0;
 
-    if (!addressId) {
+    let targetAddress = null;
+    if (addressId && req.user?.addresses) {
+      targetAddress = req.user.addresses.id(addressId);
+    }
+
+    // Support coordinates directly from map picker or guest checkout
+    if (!targetAddress && req.query.lat && req.query.lng) {
+      targetAddress = {
+        lat: Number(req.query.lat),
+        lng: Number(req.query.lng),
+        line: req.query.line || 'Delivery Location'
+      };
+    }
+
+    if (!targetAddress) {
       issues.push({ code: 'ADDRESS_REQUIRED' });
     } else {
-      const address = req.user.addresses.id(addressId);
-      if (!address) {
-        issues.push({ code: 'ADDRESS_REQUIRED' });
-      } else {
-        feasibilityResult = await checkFeasibility(seller, address);
-        etaMins = feasibilityResult.etaMins;
+      feasibilityResult = await checkFeasibility(seller, targetAddress);
+      etaMins = feasibilityResult.etaMins;
 
-        if (!feasibilityResult.feasible) {
-          if (feasibilityResult.reason === 'SELLER_NOT_ACCEPTING') {
-            if (!issues.some((i) => i.code === 'SELLER_NOT_ACCEPTING')) {
-              issues.push({ code: 'SELLER_NOT_ACCEPTING' });
-            }
-          } else {
-            issues.push({ code: 'OUT_OF_DELIVERY_RANGE' });
+      if (!feasibilityResult.feasible) {
+        if (feasibilityResult.reason === 'SELLER_NOT_ACCEPTING') {
+          if (!issues.some((i) => i.code === 'SELLER_NOT_ACCEPTING')) {
+            issues.push({ code: 'SELLER_NOT_ACCEPTING' });
           }
         } else {
-          customerDeliveryCharge = feasibilityResult.deliveryChargePaise;
+          issues.push({ code: 'OUT_OF_DELIVERY_RANGE' });
         }
+      } else {
+        customerDeliveryCharge = feasibilityResult.deliveryChargePaise;
       }
     }
 

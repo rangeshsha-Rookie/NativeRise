@@ -143,10 +143,6 @@ async function toolGetSellerNegativeReviews(sellerProfile) {
  * Handle Assistant Chat Request
  */
 export async function chatAssistant({ user, messages = [], lang = 'en' }) {
-  if (user.role === 'partner') {
-    throw new HttpError(403, CODES.FORBIDDEN_ROLE, null, 'Delivery partners do not have assistant access');
-  }
-
   const lastUserMsg = messages[messages.length - 1]?.content || '';
   const lowerMsg = lastUserMsg.toLowerCase();
   const cards = [];
@@ -155,7 +151,35 @@ export async function chatAssistant({ user, messages = [], lang = 'en' }) {
 
   const isMarathi = lang === 'mr' || /[\u0900-\u097F]/.test(lastUserMsg);
 
-  if (user.role === 'customer') {
+  // Delivery Partner Assistance
+  if (user?.role === 'partner') {
+    if (lowerMsg.includes('payout') || lowerMsg.includes('earning') || lowerMsg.includes('कमाई') || lowerMsg.includes('पैसे')) {
+      reply = isMarathi
+        ? 'डिलिव्हरी पार्टनर पेआउट्स प्रत्येक पूर्ण झालेल्या ट्रिपवर मोजले जातात आणि थेट तुमच्या खात्यात जमा होतात. तुमचा जमा तपशील "कमाई आणि कॅश डिपॉझिट" टॅबमध्ये पहा.'
+        : 'Partner earnings are credited per completed delivery trip. View your full ledger under the "Earnings & Cash Ledger" tab.';
+    } else if (lowerMsg.includes('job') || lowerMsg.includes('order') || lowerMsg.includes('डिलिव्हरी') || lowerMsg.includes('काम')) {
+      reply = isMarathi
+        ? 'नवीन उपलब्ध ऑर्डर्स पाहण्यासाठी "जवळपासच्या डिलिव्हरी ऑर्डर्स" वर जा आणि गावातील पॅक झालेली ऑर्डर स्वीकारा.'
+        : 'Browse open jobs by navigating to "Find Delivery Jobs" to view and accept PACKED orders in your service radius.';
+    } else if (lowerMsg.includes('cash') || lowerMsg.includes('deposit') || lowerMsg.includes('cod') || lowerMsg.includes('कॅश')) {
+      reply = isMarathi
+        ? 'ग्राहकाकडून स्वीकारलेली COD रोख रक्कम तुमच्या वॉलेटमध्ये नोंदवली जाते. तुम्ही ती ॲपमधील "Deposit Cash" बटणावरून सेटल करू शकता.'
+        : 'Cash collected from COD orders is tracked in your ledger. You can simulate depositing cash via the Earnings tab.';
+    } else {
+      reply = isMarathi
+        ? 'नमस्कार पार्टनर! मी NativeRise AI सहाय्यक आहे. मी तुम्हाला डिलिव्हरी ऑर्डर्स, ट्रिप पेआउट, कॅश डिपॉझिट आणि ॲप वापराबद्दल मदत करू शकतो.'
+        : 'Namaste Partner! I am your NativeRise AI assistant. I can help with finding delivery jobs, understanding payouts, cash deposits, and route assistance.';
+    }
+
+    return {
+      reply,
+      cards: [],
+      suggestedAction: null
+    };
+  }
+
+  // Customer or Guest Assistance
+  if (user?.role === 'customer' || !user || !user.role) {
     // 1. Products under Rs X
     if (lowerMsg.includes('under') || lowerMsg.includes('below') || lowerMsg.includes('कमी') || lowerMsg.includes('३००') || lowerMsg.includes('300')) {
       const matchPrice = lastUserMsg.match(/\d+/);

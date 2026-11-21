@@ -2,6 +2,7 @@
 import { Router } from 'express';
 import { requireAuth, requireRole } from '../middleware/auth.js';
 import { uploadSingleImage } from '../middleware/upload.js';
+import { chat } from '../controllers/assistant.controller.js';
 import {
   postWhatToSell,
   postSnapAndSell,
@@ -13,7 +14,11 @@ import {
 
 const router = Router();
 
-// All AI features are for seller
+// Customer/General Assistant endpoint accessible under /ai/assistant
+router.post('/assistant', chat);
+router.post('/assistant/chat', chat);
+
+// Seller AI features require seller role
 router.use(requireAuth, requireRole('seller'));
 
 router.post('/what-to-sell', postWhatToSell);

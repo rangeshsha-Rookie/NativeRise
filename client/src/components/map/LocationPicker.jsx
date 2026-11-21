@@ -128,6 +128,34 @@ export function LocationPicker({
           </div>
         )}
 
+        {/* Quick Demo Village Presets */}
+        <div className="space-y-1.5">
+          <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider block">
+            {t('map.quickPresets', 'Quick Demo Locations (Direct Village Delivery):')}
+          </span>
+          <div className="flex flex-wrap gap-1.5 text-xs">
+            {[
+              { label: '🌾 Padgha Village (Patil Farm)', lat: 19.3361, lng: 73.1584, line: 'Padgha Main Village, Bhiwandi, Maharashtra' },
+              { label: "🏺 Chinchoti (Sunita's Pickles)", lat: 19.3512, lng: 72.8942, line: 'Chinchoti Gaon, Vasai, Maharashtra' },
+              { label: '🧵 Titwala (Lata Handloom)', lat: 19.2982, lng: 73.2081, line: 'Titwala Station Road, Kalyan, Maharashtra' },
+              { label: '🍬 Manor (More Gul Udyog)', lat: 19.7420, lng: 72.9120, line: 'Manor Village Market, Palghar, Maharashtra' }
+            ].map((preset, pIdx) => (
+              <button
+                key={pIdx}
+                type="button"
+                onClick={() => {
+                  setCoords({ lat: preset.lat, lng: preset.lng });
+                  setAddressLine(preset.line);
+                  setLandmark('Village Center');
+                }}
+                className="px-2.5 py-1 rounded-full bg-amber-50 hover:bg-amber-100 border border-amber-200 text-stone-800 font-medium transition-colors"
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
+        </div>
+
         {/* Current Location button */}
         <Button
           variant="secondary"

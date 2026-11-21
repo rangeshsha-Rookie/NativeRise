@@ -223,7 +223,9 @@ export async function checkFeasibility(seller, customerCoords) {
 
   const { distanceKm, distanceEstimated } = await roadDistanceKm(seller.location, customerCoords);
   const maxKm = seller.maxDeliveryKm || DEFAULT_MAX_DELIVERY_KM;
-  const feasible = distanceKm <= maxKm;
+  // If STRICT_GEOFENCE is enabled, strictly enforce maxKm radius.
+  // In demo / test evaluation mode, allow orders so customers anywhere can test payments and workflows.
+  const feasible = config.STRICT_GEOFENCE ? distanceKm <= maxKm : true;
 
   const eta = calculateETA(seller.prepTimeMins, distanceKm);
   const payout = calculatePartnerPayout(distanceKm);

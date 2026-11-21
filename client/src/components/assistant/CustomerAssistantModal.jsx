@@ -51,7 +51,10 @@ export function CustomerAssistantModal() {
     const queryText = (textToSend || input).trim();
     if (!queryText || loading) return;
 
-    if (!isAuthenticated) {
+    const lower = queryText.toLowerCase();
+    const isOrderQuery = lower.includes('my order') || lower.includes('order status') || lower.includes('ऑर्डर स्थिती') || lower.includes('माझी ऑर्डर');
+
+    if (isOrderQuery && !isAuthenticated) {
       setMessages((prev) => [
         ...prev,
         { role: 'user', content: queryText },
@@ -59,8 +62,8 @@ export function CustomerAssistantModal() {
           role: 'assistant',
           content:
             i18n.language === 'mr'
-              ? 'कृपया AI सहाय्यकाशी संवाद साधण्यासाठी आधी लॉगिन करा.'
-              : 'Please log in to chat with the NativeRise AI assistant.',
+              ? 'कृपया तुमच्या ऑर्डरची स्थिती तपासण्यासाठी आधी लॉगिन करा.'
+              : 'Please log in to check your order status.',
           requiresLogin: true
         }
       ]);
@@ -79,19 +82,33 @@ export function CustomerAssistantModal() {
         .filter((m) => m.role === 'user' || m.role === 'assistant')
         .map((m) => ({ role: m.role, content: m.content }));
 
-      const res = await apiClient.post('/ai/assistant', {
-        message: queryText,
-        history: history.slice(-6)
-      });
+      let res;
+      try {
+        res = await apiClient.post('/assistant/chat', {
+          messages: history,
+          message: queryText,
+          history: history.slice(-6)
+        });
+      } catch {
+        res = await apiClient.post('/ai/assistant', {
+          messages: history,
+          message: queryText,
+          history: history.slice(-6)
+        });
+      }
 
-      if (res?.ok && res.data) {
+      const replyText = res?.data?.reply || res?.reply || res?.data?.message || '';
+      const cardsList = res?.data?.cards || res?.cards || [];
+      const actionsList = res?.data?.actions || res?.actions || [];
+
+      if (replyText) {
         setMessages((prev) => [
           ...prev,
           {
             role: 'assistant',
-            content: res.data.reply || '',
-            cards: res.data.cards || [],
-            actions: res.data.actions || []
+            content: replyText,
+            cards: cardsList,
+            actions: actionsList
           }
         ]);
       } else {
